@@ -1,17 +1,19 @@
-# BaselHack 2024
+# Anilog
 
-This is the template repository, which makes our lives (and especially the lives of the jury) easier,
-if you follow our structure.
+Anilog is a web app that encourages nature exploration by rewarding users for discovering new plant and animal species. Users can earn points for their discoveries. Similar to Pokémon GO in encouraging outdoor activity, Anilog differs in that it focuses attention on the natural world rather than the screen.
 
-## Explanation
+Our goal is to connect people with nature and increase their knowledge of plants and animals.
 
-Please make sure that everything, that is code related, goes into `code` directory.
+Deployed application: [webapp](https://anilog-baselhack.vercel.app/)
 
-If you have documentation about the code (e.g. UML Diagrams, a readme etc.), that should go into the `documentation` directory.
+## Team
 
-If you have assets (like videos, presentations etc.), this can go into the `assets` directory.
-
-You can use the MIT license in this template. Make sure to adjust the copy right holders in the placeholder `<copyright holder>` and add every team member to it.
-You are also free to choose any other license - depending on the consensus of your team.
-
-Thanks a lot!
+- Nadia 🐈
+- Marco 🐐
+- Cizi 🍳
+- Leon 👴🏻
+- Meredit 🪄
+- Samuel 🍕
+- Silvan 🦊
+- Yves 🦥
+- Yannik 🍣
