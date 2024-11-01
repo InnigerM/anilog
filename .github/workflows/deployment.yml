@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SUPABASE_ACCESS_TOKEN: $SUPABASE_ACCESS_TOKEN
-      PROJECT_ID: $SUPABASE_PROJECT_ID
+      SUPABASE_ACCESS_TOKEN: SUPABASE_ACCESS_TOKEN
+      PROJECT_ID: SUPABASE_PROJECT_ID
 
     steps:
       - uses: actions/checkout@v3
