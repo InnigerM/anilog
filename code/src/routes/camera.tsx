@@ -1,14 +1,18 @@
 import * as React from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { MutableRefObject, useEffect, useRef } from 'react'
+import {MutableRefObject, useEffect, useRef, useState} from 'react'
+import {Button} from "@/components/ui/button";
+import {Camera, Search, X} from "lucide-react";
+import {cn} from "@/lib/utils";
 
 export const Route = createFileRoute('/camera')({
   component: CameraComponent,
 })
 
 function CameraComponent() {
-  const videoRef: MutableRefObject<null | HTMLVideoElement> = useRef(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const videoRef: MutableRefObject<null | HTMLVideoElement> = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [showCanvas, setShowCanvas] = useState(false);
 
   const deviceSupported = () => {
     return (
@@ -54,8 +58,10 @@ function CameraComponent() {
     const context = canvas.getContext('2d')
     context?.drawImage(video, 0, 0, canvas.width, canvas.height)
 
-    const base64Image = canvas.toDataURL('image/png') // Get the image as base64
-    console.log('Base64 Image:', base64Image)
+    setShowCanvas(true);
+
+    // const base64Image = canvas.toDataURL('image/png') // Get the image as base64
+    // console.log('Base64 Image:', base64Image)
 
     // canvas.toBlob((blob) => {
     //   if (blob) {
@@ -86,10 +92,25 @@ function CameraComponent() {
   }
 
   return (
-    <div className='w-max-[1440px] mx-auto'>
-      <video ref={videoRef} className="bg-default w-[500px] h-[400px]"></video>
-      <canvas ref={canvasRef} className='w-[500px] h-[400px]'></canvas>
-      <button onClick={() => takeScreenshot()}>takeScreenshot</button>
+    <div className='absolute top-0 left-0 w-screen h-screen'>
+      <div className='h-full w-full top-0 left-0 relative bg-black'>
+        {
+          showCanvas && <div className='absolute top-0 left-0 w-full justify-end flex p-4 z-50'>
+            <X className='cursor-pointer' onClick={() => setShowCanvas(false)}/>
+          </div>
+        }
+        <canvas ref={canvasRef} className={cn("absolute top-0 max-w-full", {'invisible': !showCanvas})}/>
+        <video ref={videoRef} className={cn("absolute top-0 max-w-full", {'invisible': showCanvas})}></video>
+      </div>
+      <div className='absolute w-full flex justify-center bottom-0 z-50 p-4'>
+        {!showCanvas && <Button className='p-4 rounded-full bg-red-700' onClick={() => takeScreenshot()}>
+          <Camera size={40}/>
+        </Button>}
+        {showCanvas && <Button className='p-4 rounded-full bg-red-700' onClick={() => takeScreenshot()}>
+          <Search size={40}/>
+        </Button>}
+      </div>
+
     </div>
   )
 }
