@@ -1,19 +1,10 @@
-import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
+import * as React from 'react'
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute("/")({
-  component: HomeComponent,
-});
+export const Route = createFileRoute('/')({
+  component: RouteComponent,
+})
 
-function HomeComponent() {
-  const [count, setCount] = useState<number>(0);
-
-  return (
-    <div className="p-2">
-      <h3>Welcome Home!</h3>
-      <p>Count: {count}</p>
-      <Button onClick={() => setCount(count + 1)}>COOOUUUUNT</Button>
-    </div>
-  );
+function RouteComponent() {
+  return 'Hello /!'
 }
