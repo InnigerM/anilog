@@ -11,13 +11,14 @@
     "start": "vite"
   },
   "devDependencies": {
+    "@tanstack/router-plugin": "^1.78.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@tanstack/router-plugin": "^1.78.0",
     "@vitejs/plugin-react": "^4.3.2",
     "vite": "^5.4.8"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.13.1",
     "@tanstack/react-router": "^1.78.0",
     "@tanstack/router-devtools": "^1.78.0",
     "react": "^18.3.1",
