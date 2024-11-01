@@ -27,6 +27,14 @@ function RootComponent() {
         >
           About
         </Link>
+          <Link
+              to="/camera"
+              activeProps={{
+                  className: 'font-bold',
+              }}
+          >
+              Camera
+          </Link>
       </div>
       <hr />
       <Outlet />
