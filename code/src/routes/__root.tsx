@@ -10,6 +10,7 @@ import Navigation from '@/components/navigation/navigation';
 import { View } from '@/lib/types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CameraProvider } from '@/lib/providers/camera-provider';
+import { Toaster } from 'sonner';
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ function RootComponent() {
                 <CameraProvider>
                     <Outlet />
                     <Navigation variant={view} />
+                    <Toaster />
                 </CameraProvider>
             </QueryClientProvider>
         </>
