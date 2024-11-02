@@ -167,7 +167,7 @@ function CameraComponent() {
                     })}
                 ></video>
             </div>
-            <div className="absolute w-full flex justify-center bottom-0 z-50 p-4">
+            <div className="absolute w-full flex justify-center bottom-[100px] z-50 p-4">
                 {!showCanvas && (
                     <Button
                         className="p-4 rounded-full bg-red-700"
