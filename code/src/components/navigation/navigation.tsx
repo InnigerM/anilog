@@ -1,17 +1,25 @@
 import React from 'react';
-import {
-    Link,
-    Outlet,
-    createRootRoute,
-    useRouterState,
-} from '@tanstack/react-router';
+import { Link, useRouterState } from '@tanstack/react-router';
 import { Button } from '../ui/button';
+import { View } from '@/lib/types';
+import { cn } from '@/lib/utils';
+import '../../index.css';
 
-export default function Navigation() {
+type NavigationProps = {
+    variant: View;
+};
+export default function Navigation({ variant }: NavigationProps) {
     const router = useRouterState();
 
     return (
-        <nav className="p-2 flex gap-2 text-lg fixed bottom-0 w-full justify-evenly bg-gray-800 text-white z-50">
+        <nav
+            className={cn(
+                'px-5 pb-5 pt-10  flex gap-2 text-lg fixed bottom-0 w-full justify-evenly bg-gray-800 text-white z-[1000]',
+                variant === 'MAP' && 'bg-blossom-pink',
+                variant === 'CAMERA' && 'bg-mint-green',
+                variant === 'COLLECTION' && 'bg-hibiscus-orange',
+            )}
+        >
             <Link
                 to="/"
                 activeProps={{
