@@ -48,7 +48,7 @@ export type Database = {
           id: string
           name_common: string | null
           name_latin: string | null
-          nateive_habitat: string | null
+          native_habitat: string | null
           shiny: boolean | null
         }
         Insert: {
@@ -62,7 +62,7 @@ export type Database = {
           id: string
           name_common?: string | null
           name_latin?: string | null
-          nateive_habitat?: string | null
+          native_habitat?: string | null
           shiny?: boolean | null
         }
         Update: {
@@ -76,10 +76,52 @@ export type Database = {
           id?: string
           name_common?: string | null
           name_latin?: string | null
-          nateive_habitat?: string | null
+          native_habitat?: string | null
           shiny?: boolean | null
         }
         Relationships: []
+      }
+      scans: {
+        Row: {
+          created_at: string
+          id: number
+          imageUrl: string
+          location: unknown | null
+          plantId: string
+          userId: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          imageUrl: string
+          location?: unknown | null
+          plantId: string
+          userId: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          imageUrl?: string
+          location?: unknown | null
+          plantId?: string
+          userId?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scans_plantId_fkey"
+            columns: ["plantId"]
+            isOneToOne: false
+            referencedRelation: "plants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scans_userId_fkey"
+            columns: ["userId"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user: {
         Row: {
