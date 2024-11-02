@@ -15,6 +15,7 @@ import { Route as MapImport } from './routes/map'
 import { Route as CameraImport } from './routes/camera'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as PlantsPlantIdImport } from './routes/plants.$plantId'
 
 // Create/Update Routes
 
@@ -39,6 +40,12 @@ const AboutRoute = AboutImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PlantsPlantIdRoute = PlantsPlantIdImport.update({
+  id: '/plants/$plantId',
+  path: '/plants/$plantId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MapImport
       parentRoute: typeof rootRoute
     }
+    '/plants/$plantId': {
+      id: '/plants/$plantId'
+      path: '/plants/$plantId'
+      fullPath: '/plants/$plantId'
+      preLoaderRoute: typeof PlantsPlantIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -84,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/camera': typeof CameraRoute
   '/map': typeof MapRoute
+  '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -91,6 +106,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/camera': typeof CameraRoute
   '/map': typeof MapRoute
+  '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
 export interface FileRoutesById {
@@ -99,14 +115,15 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/camera': typeof CameraRoute
   '/map': typeof MapRoute
+  '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/camera' | '/map'
+  fullPaths: '/' | '/about' | '/camera' | '/map' | '/plants/$plantId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/camera' | '/map'
-  id: '__root__' | '/' | '/about' | '/camera' | '/map'
+  to: '/' | '/about' | '/camera' | '/map' | '/plants/$plantId'
+  id: '__root__' | '/' | '/about' | '/camera' | '/map' | '/plants/$plantId'
   fileRoutesById: FileRoutesById
 }
 
@@ -115,6 +132,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CameraRoute: typeof CameraRoute
   MapRoute: typeof MapRoute
+  PlantsPlantIdRoute: typeof PlantsPlantIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -122,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CameraRoute: CameraRoute,
   MapRoute: MapRoute,
+  PlantsPlantIdRoute: PlantsPlantIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -137,7 +156,8 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/camera",
-        "/map"
+        "/map",
+        "/plants/$plantId"
       ]
     },
     "/": {
@@ -151,6 +171,9 @@ export const routeTree = rootRoute
     },
     "/map": {
       "filePath": "map.tsx"
+    },
+    "/plants/$plantId": {
+      "filePath": "plants.$plantId.tsx"
     }
   }
 }
