@@ -1,6 +1,6 @@
 @use "sass:string";
 $icomoon-font-family: "anilog" !default;
-$icomoon-font-path: "assets/fonts/anilog-icons" !default;
+$icomoon-font-path: "public/fonts/anilog-icons" !default;
 
 $icon-arrow: string.unquote('"\\e908"');
 $icon-pin: string.unquote('"\\e907"');
@@ -11,4 +11,3 @@ $icon-plant: string.unquote('"\\e901"');
 $icon-camera: string.unquote('"\\e902"');
 $icon-map: string.unquote('"\\e903"');
 $icon-leaderboard: string.unquote('"\\e904"');
-
