@@ -6,6 +6,7 @@ import { Camera, Search, X } from 'lucide-react';
 import { cn, supabase } from '@/lib/utils';
 import { v4 as uuidv4 } from 'uuid';
 import { useCamera } from '@/lib/providers/camera-provider';
+import { toast } from 'sonner';
 
 export const Route = createFileRoute('/camera')({
     component: CameraComponent,
@@ -42,7 +43,6 @@ function CameraComponent() {
         setShowCanvas(true);
 
         const base64Image = canvas.toDataURL('image/png');
-        console.log('Base64 Image:', base64Image);
 
         canvas.toBlob(async (blob) => {
             if (blob) {
@@ -136,18 +136,28 @@ function CameraComponent() {
             const data = await response.json();
             console.log(data);
 
-            if (!data.was_recognized) {
+            if (!data.id) {
                 throw Error('Plant was NOT recognized!');
             }
 
             navigate({
                 to: '/plants/$plantId',
                 params: { plantId: data.id },
+                ...(data.new && { search: { new: true } }),
             });
         } catch (error) {
             console.error(error);
             setIsAnalysing(false);
             setShowCanvas(false);
+            toast.error('Plant could not be recognized!', {
+                style: {
+                    bottom: '84px',
+                    backgroundColor: '#F53E4D',
+                    color: 'white',
+                    border: 'none',
+                },
+                position: 'bottom-center',
+            });
         }
     };
 
