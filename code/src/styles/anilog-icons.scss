@@ -1,0 +1,70 @@
+@use "variables";
+
+@font-face {
+  font-family: '#{variables.$icomoon-font-family}';
+  src:  url('#{variables.$icomoon-font-path}/#{variables.$icomoon-font-family}.eot?egymkt');
+  src:  url('#{variables.$icomoon-font-path}/#{variables.$icomoon-font-family}.eot?egymkt#iefix') format('embedded-opentype'),
+    url('#{variables.$icomoon-font-path}/#{variables.$icomoon-font-family}.ttf?egymkt') format('truetype'),
+    url('#{variables.$icomoon-font-path}/#{variables.$icomoon-font-family}.woff?egymkt') format('woff'),
+    url('#{variables.$icomoon-font-path}/#{variables.$icomoon-font-family}.svg?egymkt##{variables.$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{variables.$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pin {
+  &:before {
+    content: variables.$icon-pin;
+  }
+}
+.icon-shutter {
+  &:before {
+    content: variables.$icon-shutter;
+  }
+}
+.icon-signpost {
+  &:before {
+    content: variables.$icon-signpost;
+  }
+}
+.icon-star-pin {
+  &:before {
+    content: variables.$icon-star-pin;
+  }
+}
+.icon-plant {
+  &:before {
+    content: variables.$icon-plant;
+  }
+}
+.icon-camera {
+  &:before {
+    content: variables.$icon-camera;
+  }
+}
+.icon-map {
+  &:before {
+    content: variables.$icon-map;
+  }
+}
+.icon-leaderboard {
+  &:before {
+    content: variables.$icon-leaderboard;
+  }
+}
+
