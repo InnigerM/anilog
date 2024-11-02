@@ -15,3 +15,7 @@ Sync the .env file to production
 
 Check the synced env keys
 `npx supabase secrets list`
+
+## Deploy
+
+`npx supabase functions deploy --project-ref rgcbaftxplqejgurmxyx`
