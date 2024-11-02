@@ -1,15 +1,11 @@
-import * as React from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import * as React from 'react';
+import { createFileRoute } from '@tanstack/react-router';
+import { Map } from '@/components/map';
 
 export const Route = createFileRoute('/')({
-  component: RouteComponent,
-})
+    component: RouteComponent,
+});
 
 function RouteComponent() {
-  return (
-      <div>
-        Hello /!
-        <i className="icon-map" />
-      </div>
-  )
+    return <Map />;
 }
