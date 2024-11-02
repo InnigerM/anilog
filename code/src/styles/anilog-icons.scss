@@ -33,6 +33,11 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-arrow {
+  &:before {
+    content: variables.$icon-arrow;
+  }
+}
 .icon-pin {
     &:before {
         content: variables.$icon-pin;

@@ -48,7 +48,7 @@ export type Database = {
           id: string
           name_common: string | null
           name_latin: string | null
-          nateive_habitat: string | null
+          native_habitat: string | null
           shiny: boolean | null
         }
         Insert: {
@@ -62,7 +62,7 @@ export type Database = {
           id: string
           name_common?: string | null
           name_latin?: string | null
-          nateive_habitat?: string | null
+          native_habitat?: string | null
           shiny?: boolean | null
         }
         Update: {
@@ -76,7 +76,7 @@ export type Database = {
           id?: string
           name_common?: string | null
           name_latin?: string | null
-          nateive_habitat?: string | null
+          native_habitat?: string | null
           shiny?: boolean | null
         }
         Relationships: []

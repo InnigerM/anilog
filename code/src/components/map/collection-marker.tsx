@@ -2,6 +2,7 @@ import { Marker, Popup } from 'react-leaflet';
 import { Button } from '@/components/ui/button';
 import { H2 } from '@/components/ui/typography';
 import { icon } from 'leaflet';
+import {Collection} from "@/model/collection.model";
 
 export function CollectionMarker({ lat, lng, name, id, category }: Collection) {
     function goToObject() {

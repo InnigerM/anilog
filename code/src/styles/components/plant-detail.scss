@@ -1,0 +1,6 @@
+.fun-fact-box {
+  --mask: linear-gradient(#000 0 0) 50%/calc(100% - 9.25px) calc(100% - 9.25px) no-repeat,
+  radial-gradient(farthest-side, #000 98%, #0000) 0 0/10px 10px round;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
