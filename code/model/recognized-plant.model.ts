@@ -5,7 +5,7 @@ export type RegocnizedPlant = {
     endangered_level: EngangerdLevel;
     description_short: string;
     description_long: string;
-    nateive_habitat: string;
+    native_habitat: string;
     color: string;
     family: string;
     fun_fact: string;
