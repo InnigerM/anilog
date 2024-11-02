@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { Database } from 'database.types';
 import { createClient } from '@supabase/supabase-js';
 import { USER_LOCAL_STORAGE_KEY, UserResponse } from './api/user';
+import { LatLng } from 'leaflet';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -18,4 +19,19 @@ export function getUserFromLocalStorage() {
     if (!userItem) return null;
 
     return JSON.parse(userItem) as UserResponse;
+}
+
+export function getCurrentPosition(
+    callback: (position: LatLng | null) => void,
+) {
+    if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            callback(
+                new LatLng(position.coords.latitude, position.coords.longitude),
+            );
+        });
+    } else {
+        console.log('no access to geolocation');
+        callback(null);
+    }
 }

@@ -1,6 +1,5 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import { Registration } from '@/components/user';
-import { USER_LOCAL_STORAGE_KEY, UserResponse } from '@/lib/api/user';
 import { getUserFromLocalStorage } from '@/lib/utils';
 
 export const Route = createFileRoute('/')({

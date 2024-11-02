@@ -1,13 +1,16 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
-import { cn, getUserFromLocalStorage, supabase } from '@/lib/utils';
+import {
+    cn,
+    getCurrentPosition,
+    getUserFromLocalStorage,
+    supabase,
+} from '@/lib/utils';
 import { v4 as uuidv4 } from 'uuid';
 import { useCamera } from '@/lib/providers/camera-provider';
 import { toast } from 'sonner';
 import { useCreateScanMutation } from '@/lib/api/scans';
-import { LatLng } from 'leaflet';
-import { useLocation } from '@/lib/hooks/use-location';
 import { LoadingOverlay } from '@/components/ui/loading-overlay';
 
 export const Route = createFileRoute('/camera')({
@@ -22,9 +25,6 @@ function CameraComponent() {
     const [isAnalysing, setIsAnalysing] = useState(false);
     const navigate = useNavigate();
     const createScanMutation = useCreateScanMutation();
-    const location = useLocation();
-
-    console.log(location);
 
     const deviceSupported = () => {
         return (
@@ -147,18 +147,20 @@ function CameraComponent() {
             }
 
             console.log(location);
-            createScanMutation.mutateAsync({
-                imageUrl,
-                location,
-                plantId: data.id,
-                // @ts-expect-error only logged in users can access this route, thus we know that the user is defined
-                userId: getUserFromLocalStorage().id,
-            });
+            getCurrentPosition((position) => {
+                createScanMutation.mutateAsync({
+                    imageUrl,
+                    location: position,
+                    plantId: data.id,
+                    // @ts-expect-error only logged in users can access this route, thus we know that the user is defined
+                    userId: getUserFromLocalStorage().id,
+                });
 
-            navigate({
-                to: '/plants/$plantId',
-                params: { plantId: data.id },
-                ...(data.new && { search: { isNew: true } }),
+                navigate({
+                    to: '/plants/$plantId',
+                    params: { plantId: data.id },
+                    ...(data.new && { search: { isNew: true } }),
+                });
             });
         } catch (error) {
             console.error(error);
