@@ -6,5 +6,10 @@ export const Route = createFileRoute('/')({
 })
 
 function RouteComponent() {
-  return 'Hello /!'
+  return (
+      <div>
+        Hello /!
+        <i className="icon-map" />
+      </div>
+  )
 }
