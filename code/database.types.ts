@@ -126,6 +126,27 @@ export type Database = {
           },
         ]
       }
+      "special-plants": {
+        Row: {
+          created_at: string
+          id: string
+          plant: string | null
+          user_name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          plant?: string | null
+          user_name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          plant?: string | null
+          user_name?: string | null
+        }
+        Relationships: []
+      }
       user: {
         Row: {
           created_at: string
