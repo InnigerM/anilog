@@ -28,6 +28,14 @@ function RootComponent() {
         >
           About
         </Link>
+        <Link
+          to="/map"
+          activeProps={{
+            className: "font-bold",
+          }}
+        >
+          Map
+        </Link>
       </div>
       <hr />
       <Outlet />
