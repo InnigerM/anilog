@@ -8,7 +8,7 @@ export function Map() {
       <MapContainer
         className="h-[90vh] relative"
         center={[47.5601333, 7.5879957]}
-        zoom={17}
+        zoom={15}
         scrollWheelZoom={false}
       >
         <TileLayer
