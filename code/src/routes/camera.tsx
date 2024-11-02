@@ -1,12 +1,11 @@
-import * as React from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Camera, Search, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { cn, supabase } from '@/lib/utils';
 import { v4 as uuidv4 } from 'uuid';
 import { useCamera } from '@/lib/providers/camera-provider';
 import { toast } from 'sonner';
+import { LoadingOverlay } from '@/components/ui/loading-overlay';
 
 export const Route = createFileRoute('/camera')({
     component: CameraComponent,
@@ -162,13 +161,9 @@ function CameraComponent() {
     };
 
     return (
-        <div className="absolute top-0 left-0 w-screen h-svh">
-            {isAnalysing && (
-                <div className="absolute z-20 top-0 flex items-center justify-center w-full h-full">
-                    <img src="./analyse-plant.gif" className="w-[50vw]" />
-                </div>
-            )}
+        <div className="absolute top-0 left-0 right-0 bottom-0 h-svh">
             <div className="h-full w-full top-0 left-0 relative bg-black">
+                {isAnalysing && <LoadingOverlay />}
                 {showCanvas && (
                     <div className="absolute top-0 left-0 w-full justify-end flex p-4 z-50">
                         <X
@@ -179,14 +174,14 @@ function CameraComponent() {
                 )}
                 <canvas
                     ref={canvasRef}
-                    className={cn('absolute top-0 max-w-full', {
+                    className={cn('absolute top-0 max-w-full ', {
                         invisible: !showCanvas,
                     })}
                 />
                 <video
                     ref={videoRef}
                     playsInline
-                    className={cn('absolute top-0 max-w-full', {
+                    className={cn('absolute top-0 max-w-full ', {
                         invisible: showCanvas,
                     })}
                 ></video>
