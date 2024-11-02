@@ -10,127 +10,123 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root';
-import { Route as CollectionImport } from './routes/collection';
-import { Route as CameraImport } from './routes/camera';
-import { Route as IndexImport } from './routes/index';
-import { Route as PlantsPlantIdImport } from './routes/plants.$plantId';
+import { Route as rootRoute } from './routes/__root'
+import { Route as CollectionImport } from './routes/collection'
+import { Route as CameraImport } from './routes/camera'
+import { Route as IndexImport } from './routes/index'
+import { Route as PlantsPlantIdImport } from './routes/plants.$plantId'
 
 // Create/Update Routes
 
 const CollectionRoute = CollectionImport.update({
-    id: '/collection',
-    path: '/collection',
-    getParentRoute: () => rootRoute,
-} as any);
+  id: '/collection',
+  path: '/collection',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const CameraRoute = CameraImport.update({
-    id: '/camera',
-    path: '/camera',
-    getParentRoute: () => rootRoute,
-} as any);
+  id: '/camera',
+  path: '/camera',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => rootRoute,
-} as any);
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const PlantsPlantIdRoute = PlantsPlantIdImport.update({
-    id: '/plants/$plantId',
-    path: '/plants/$plantId',
-    getParentRoute: () => rootRoute,
-} as any);
+  id: '/plants/$plantId',
+  path: '/plants/$plantId',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
-    interface FileRoutesByPath {
-        '/': {
-            id: '/';
-            path: '/';
-            fullPath: '/';
-            preLoaderRoute: typeof IndexImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/camera': {
-            id: '/camera';
-            path: '/camera';
-            fullPath: '/camera';
-            preLoaderRoute: typeof CameraImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/collection': {
-            id: '/collection';
-            path: '/collection';
-            fullPath: '/collection';
-            preLoaderRoute: typeof CollectionImport;
-            parentRoute: typeof rootRoute;
-        };
-        '/plants/$plantId': {
-            id: '/plants/$plantId';
-            path: '/plants/$plantId';
-            fullPath: '/plants/$plantId';
-            preLoaderRoute: typeof PlantsPlantIdImport;
-            parentRoute: typeof rootRoute;
-        };
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
     }
+    '/camera': {
+      id: '/camera'
+      path: '/camera'
+      fullPath: '/camera'
+      preLoaderRoute: typeof CameraImport
+      parentRoute: typeof rootRoute
+    }
+    '/collection': {
+      id: '/collection'
+      path: '/collection'
+      fullPath: '/collection'
+      preLoaderRoute: typeof CollectionImport
+      parentRoute: typeof rootRoute
+    }
+    '/plants/$plantId': {
+      id: '/plants/$plantId'
+      path: '/plants/$plantId'
+      fullPath: '/plants/$plantId'
+      preLoaderRoute: typeof PlantsPlantIdImport
+      parentRoute: typeof rootRoute
+    }
+  }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-    '/': typeof IndexRoute;
-    '/camera': typeof CameraRoute;
-    '/collection': typeof CollectionRoute;
-    '/plants/$plantId': typeof PlantsPlantIdRoute;
+  '/': typeof IndexRoute
+  '/camera': typeof CameraRoute
+  '/collection': typeof CollectionRoute
+  '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
 export interface FileRoutesByTo {
-    '/': typeof IndexRoute;
-    '/camera': typeof CameraRoute;
-    '/collection': typeof CollectionRoute;
-    '/plants/$plantId': typeof PlantsPlantIdRoute;
+  '/': typeof IndexRoute
+  '/camera': typeof CameraRoute
+  '/collection': typeof CollectionRoute
+  '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
 export interface FileRoutesById {
-    __root__: typeof rootRoute;
-    '/': typeof IndexRoute;
-    '/camera': typeof CameraRoute;
-    '/collection': typeof CollectionRoute;
-    '/plants/$plantId': typeof PlantsPlantIdRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/camera': typeof CameraRoute
+  '/collection': typeof CollectionRoute
+  '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
 export interface FileRouteTypes {
-    fileRoutesByFullPath: FileRoutesByFullPath;
-    fullPaths: '/' | '/camera' | '/collection';
-    fileRoutesByTo: FileRoutesByTo;
-    to: '/' | '/camera' | '/collection';
-    id: '__root__' | '/' | '/camera' | '/collection';
-    fullPaths: '/' | '/about' | '/camera' | '/plants/$plantId';
-    fileRoutesByTo: FileRoutesByTo;
-    to: '/' | '/about' | '/camera' | '/plants/$plantId';
-    id: '__root__' | '/' | '/about' | '/camera' | '/plants/$plantId';
-    fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/camera' | '/collection' | '/plants/$plantId'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/camera' | '/collection' | '/plants/$plantId'
+  id: '__root__' | '/' | '/camera' | '/collection' | '/plants/$plantId'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-    IndexRoute: typeof IndexRoute;
-    CameraRoute: typeof CameraRoute;
-    CollectionRoute: typeof CollectionRoute;
-    PlantsPlantIdRoute: typeof PlantsPlantIdRoute;
+  IndexRoute: typeof IndexRoute
+  CameraRoute: typeof CameraRoute
+  CollectionRoute: typeof CollectionRoute
+  PlantsPlantIdRoute: typeof PlantsPlantIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-    IndexRoute: IndexRoute,
-    CameraRoute: CameraRoute,
-    CollectionRoute: CollectionRoute,
-    PlantsPlantIdRoute: PlantsPlantIdRoute,
-};
+  IndexRoute: IndexRoute,
+  CameraRoute: CameraRoute,
+  CollectionRoute: CollectionRoute,
+  PlantsPlantIdRoute: PlantsPlantIdRoute,
+}
 
 export const routeTree = rootRoute
-    ._addFileChildren(rootRouteChildren)
-    ._addFileTypes<FileRouteTypes>();
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -140,7 +136,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/camera",
-        "/collection"
+        "/collection",
         "/plants/$plantId"
       ]
     },
@@ -152,7 +148,7 @@ export const routeTree = rootRoute
     },
     "/collection": {
       "filePath": "collection.tsx"
-
+    },
     "/plants/$plantId": {
       "filePath": "plants.$plantId.tsx"
     }
