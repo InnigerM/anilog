@@ -8,12 +8,12 @@ Deployed application: [webapp](https://anilog-baselhack.vercel.app/)
 
 ## Team
 
-- Nadia 🐈
-- Marco 🐐
-- Cizi 🍳
-- Leon 👴🏻
-- Meredit 🪄
-- Samuel 🍕
-- Silvan 🦊
-- Yves 🦥
-- Yannik 🍣
+-   Nadia 🐈
+-   Marco 🐐
+-   Cizi 🍳 (🤧🪦)
+-   Leon 👴🏻
+-   Meredit 🪄
+-   Samuel 🍕
+-   Silvan 🦊
+-   Yves 🦥
+-   Yannik 🍣

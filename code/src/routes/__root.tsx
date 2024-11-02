@@ -9,6 +9,9 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import '../index.css';
 import Navigation from '@/components/navigation/navigation';
 import { View } from '@/lib/types';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 export const Route = createRootRoute({
     component: RootComponent,
@@ -26,8 +29,10 @@ function RootComponent() {
 
     return (
         <>
-            <Outlet />
-            <Navigation variant={view} />
+            <QueryClientProvider client={queryClient}>
+                <Outlet />
+                <Navigation variant={view} />
+            </QueryClientProvider>
         </>
     );
 }
