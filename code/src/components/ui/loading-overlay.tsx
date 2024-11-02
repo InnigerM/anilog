@@ -6,7 +6,7 @@ export const LoadingOverlay: React.FC = () => {
         'Analyzing leafs',
         'Finding stem(s)',
         'Looking for flowers',
-        'Identiying plant',
+        'Identifying plant',
         'Gathering plant information',
     ];
 

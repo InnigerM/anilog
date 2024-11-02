@@ -146,9 +146,8 @@ function CameraComponent() {
                 throw Error('Plant was NOT recognized!');
             }
 
-            console.log(location);
-            getCurrentPosition((position) => {
-                createScanMutation.mutateAsync({
+            await getCurrentPosition(async (position) => {
+                await createScanMutation.mutateAsync({
                     imageUrl,
                     location: position,
                     plantId: data.id,
