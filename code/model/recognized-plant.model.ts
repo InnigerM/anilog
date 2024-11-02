@@ -1,4 +1,4 @@
-export type RegocnizedPlant = {
+export type RecognizedPlant = {
     id: string;
     name_common: string;
     name_latin: string;
