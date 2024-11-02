@@ -4,6 +4,9 @@ module.exports = {
     content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
     theme: {
         extend: {
+            height: {
+                content: 'calc(100vh - 70px)'
+            },
             borderRadius: {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
@@ -19,6 +22,7 @@ module.exports = {
                 'black-pepper': '#222222',
                 'dusty-miller-gray': '#6B6969',
                 'cotton-light-gray': '#A9A9A9',
+                'peach-cream': '#FFEDE8'
             },
             fontFamily: {
                 sans: ['Schoolbell', 'cursive'],

@@ -1,8 +1,8 @@
-export type RegocnizedPlant = {
+export type RecognizedPlant = {
     id: string;
     name_common: string;
     name_latin: string;
-    endangered_level: EngangerdLevel;
+    endangered_level: EndangeredLevel;
     description_short: string;
     description_long: string;
     native_habitat: string;
@@ -12,7 +12,7 @@ export type RegocnizedPlant = {
     shiny?: boolean; // is never returned from the API, can be set manually in supabase
 };
 
-export type EngangerdLevel =
+export type EndangeredLevel =
     | 'CR'
     | 'EN'
     | 'VU'

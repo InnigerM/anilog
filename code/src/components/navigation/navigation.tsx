@@ -23,6 +23,7 @@ export default function Navigation({ variant }: NavigationProps) {
                 variant === 'MAP' && 'bg-blossom-pink',
                 variant === 'CAMERA' && 'bg-mint-green',
                 variant === 'COLLECTION' && 'bg-hibiscus-orange',
+                variant === 'PLANTS' && 'bg-hibiscus-orange',
             )}
         >
             <Link to="/">
