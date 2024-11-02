@@ -1,11 +1,12 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import {
     AreaOfInterest,
-    Collections,
+    AreasOfInterest,
     LocationMarker,
-    MapToggle,
 } from '@/components/map';
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
+import { Collections } from '@/components/map/collections';
+import { MapToggle } from '@/components/map/map-toggle';
 
 export function Map() {
     const [mapType, setMapType] = useState<'aoi' | 'collection'>('aoi');
@@ -40,10 +41,11 @@ export function Map() {
                 <LocationMarker />
                 {mapType === 'collection' ? (
                     <Collections collections={collections} />
-                ) : null}
-                <div>
-                    <AreaOfInterest position={[47.5483177, 7.5784675]} />
-                </div>
+                ) : (
+                    <Suspense>
+                        <AreasOfInterest />
+                    </Suspense>
+                )}
             </MapContainer>
             <MapToggle
                 mapType={mapType}

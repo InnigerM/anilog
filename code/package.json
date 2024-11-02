@@ -8,7 +8,8 @@
     "dev": "vite --port=3000",
     "build": "vite build",
     "serve": "vite preview",
-    "start": "vite"
+    "start": "vite",
+    "generateTypes": "supabase gen types --lang=typescript --project-id rgcbaftxplqejgurmxyx --schema public > database.types.ts"
   },
   "devDependencies": {
     "@tanstack/router-plugin": "^1.78.0",
@@ -21,6 +22,7 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "sass-embedded": "^1.80.6",
+    "supabase": "^1.207.9",
     "tailwindcss": "^3.4.14",
     "vite": "^5.4.8"
   },
@@ -29,7 +31,8 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
-    "@supabase/supabase-js": "^1.13.1",
+    "@supabase/supabase-js": "^2.46.1",
+    "@tanstack/react-query": "^5.59.16",
     "@tanstack/react-router": "^1.78.0",
     "@tanstack/router-devtools": "^1.78.0",
     "class-variance-authority": "^0.7.0",
