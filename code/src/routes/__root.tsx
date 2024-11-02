@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-    Link,
     Outlet,
     createRootRoute,
     useRouterState,
@@ -10,6 +9,7 @@ import '../index.css';
 import Navigation from '@/components/navigation/navigation';
 import { View } from '@/lib/types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { CameraProvider } from '@/lib/providers/camera-provider';
 
 const queryClient = new QueryClient();
 
@@ -31,8 +31,10 @@ function RootComponent() {
     return (
         <>
             <QueryClientProvider client={queryClient}>
-                <Outlet />
-                <Navigation variant={view} />
+                <CameraProvider>
+                    <Outlet />
+                    <Navigation variant={view} />
+                </CameraProvider>
             </QueryClientProvider>
         </>
     );
