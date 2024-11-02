@@ -19,7 +19,12 @@ export default function PlantDetail({ plantId }: PlantDetailProps) {
                 width={170}
                 height={254}
             />
-            <H1 className="text-hibiscus-orange mt-2">{plant?.name_common}</H1>
+            <H1 className="text-hibiscus-orange mt-2 mb-0">
+                <span
+                    className={`text-hibiscus-orange mr-2 icon-${plant?.type}`}
+                ></span>
+                {plant?.name_common}
+            </H1>
             <p className="text-gray-400">lat. {plant?.name_latin}</p>
             <H2 className="mt-4 text-gray-600">
                 <span className="icon-pin mr-2"></span>
@@ -30,23 +35,35 @@ export default function PlantDetail({ plantId }: PlantDetailProps) {
                     <H2 className="text-gray-600 w-full text-center">
                         Fun fact
                     </H2>
-                    <p>{plant?.fun_fact}</p>
+                    <p className="text-center">{plant?.fun_fact}</p>
                 </div>
             </div>
-            <div className="mt-6 flex justify-evenly w-full">
-                <div>{plant?.color}</div>
-                <div>
-                    {plant?.endangered_level ? (
-                        <EndangeredLevelComponent
-                            endangeredLevel={
-                                EndangeredLevels[plant.endangered_level]
-                            }
-                        />
-                    ) : null}
+            <div className="mt-8 flex justify-evenly w-full">
+                <div className="w-1/4 text-center">
+                    <div className="icon-color text-2xl text-hibiscus-orange"></div>
+                    <div>{plant?.color}</div>
                 </div>
-                <div>{plant?.family}</div>
+                <div className="w-1/4 text-center">
+                    <div className="icon-endangered text-2xl text-hibiscus-orange"></div>
+                    <div>
+                        {plant?.endangered_level &&
+                        EndangeredLevels[plant.endangered_level] ? (
+                            <EndangeredLevelComponent
+                                endangeredLevel={
+                                    EndangeredLevels[plant.endangered_level]
+                                }
+                            />
+                        ) : (
+                            'not known'
+                        )}
+                    </div>
+                </div>
+                <div className="w-1/4 text-center">
+                    <div className="icon-family text-2xl text-hibiscus-orange"></div>
+                    <div>{plant?.family}</div>
+                </div>
             </div>
-            <p className="mt-4">{plant?.description_long}</p>
+            <p className="mt-8">{plant?.description_long}</p>
         </div>
     );
 }
