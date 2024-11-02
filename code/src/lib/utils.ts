@@ -24,28 +24,28 @@ export function getUserFromLocalStorage() {
 export async function getCurrentPosition(
     callback: (position: LatLng | null) => Promise<void>,
 ) {
-    try {
-        if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                async (position) => {
-                    console.log(
-                        `current position is ${position}, executing callback.`,
-                    );
-                    await callback(
-                        new LatLng(
-                            position.coords.latitude,
-                            position.coords.longitude,
-                        ),
-                    );
-                },
-                (error) => console.log(error),
-                { timeout: 5000 },
-            );
-        } else {
-            console.log('no access to geolocation, executing callback');
-            await callback(null);
-        }
-    } catch (e) {
+    if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                console.log(
+                    `current position is ${position}, executing callback.`,
+                );
+                await callback(
+                    new LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude,
+                    ),
+                );
+            },
+            async (error) => {
+                console.log(error);
+                // Execute callback on error, because location is not needed for a proper scan
+                await callback(null);
+            },
+            { timeout: 5000 },
+        );
+    } else {
+        console.log('no access to geolocation, executing callback');
         await callback(null);
     }
 }
