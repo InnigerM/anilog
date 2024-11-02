@@ -6,7 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { H1 } from '@/components/ui/typography';
 import { useQueryClient } from '@tanstack/react-query';
-import { getUserByEmail, useCreateUserMutation } from '@/lib/api/user';
+import {
+    getUserByEmail,
+    useCreateUserMutation,
+    USER_LOCAL_STORAGE_KEY,
+} from '@/lib/api/user';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import { Loading } from '@/components/loading';
@@ -44,6 +48,11 @@ export function Registration() {
 
             if (data?.email !== values.email) {
                 await createUserMutation.mutateAsync(values);
+            } else {
+                localStorage.setItem(
+                    USER_LOCAL_STORAGE_KEY,
+                    JSON.stringify(data),
+                );
             }
             navigate({ to: '/map' });
         } catch (e) {
