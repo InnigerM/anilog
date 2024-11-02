@@ -1,13 +1,6 @@
 import { CollectionMarker } from '@/components/map/collection-marker';
 import React from 'react';
 
-type Collection = {
-    id: number;
-    name: string;
-    lat: number;
-    lng: number;
-};
-
 type CollectionProps = {
     collections: Collection[];
 };
@@ -19,6 +12,7 @@ export function Collections({ collections }: CollectionProps) {
             lat={collection.lat}
             lng={collection.lng}
             name={collection.name}
+            category={collection.category}
             id={collection.id}
         />
     ));
