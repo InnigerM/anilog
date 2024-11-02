@@ -94,11 +94,11 @@ function CameraComponent() {
             });
 
         if (data) {
-            const { publicURL } = supabase.storage
-                .from('plants')
-                .getPublicUrl(file.name);
+            const {
+                data: { publicUrl },
+            } = supabase.storage.from('plants').getPublicUrl(file.name);
 
-            return publicURL;
+            return publicUrl;
         }
         return null;
     };
