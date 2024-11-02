@@ -13,35 +13,64 @@ const CONTENT_TYPE_HEADERS = { 'Content-Type': 'application/json' };
 Deno.serve(async (req) => {
     try {
         const { imageUrl } = await req.json();
+
+        const supabase = createClient(
+            Deno.env.get('SB_URL'),
+            Deno.env.get('SB_KEY'),
+        );
         console.log('image recieved', imageUrl);
 
         // setup clients
         const openai = new OpenAI({
             apiKey: Deno.env.get('OPENAI_KEY'),
         });
-        const assistantId = 'asst_86rYwd4L2Ux25rWec1mRSEoY';
-        const thread = await openai.beta.threads.create({
+
+        // Download image from url
+        const response = await fetch(imageUrl);
+        const arrayBuffer = await response.arrayBuffer();
+
+        const fileName = 'plant.png';
+        const mimeType = 'image/png';
+
+        // Convert ArrayBuffer to Blob, then to File
+        const blob = new Blob([arrayBuffer], { type: mimeType });
+
+        // Create openai file for vision
+        const file = await openai.files.create({
+            file: new File([blob], fileName, { type: mimeType }),
+            purpose: 'vision',
+        });
+
+        const recognizerAssistantId = 'asst_86rYwd4L2Ux25rWec1mRSEoY';
+        const recognizerThread = await openai.beta.threads.create({
             messages: [
                 {
                     role: 'user',
-                    content: imageUrl,
+                    content: [
+                        {
+                            type: 'image_file',
+                            image_file: {
+                                file_id: file.id,
+                            },
+                        },
+                    ],
                 },
             ],
         });
 
-        const supabase = createClient(
-            Deno.env.get('SB_URL'),
-            Deno.env.get('SB_KEY'),
-        );
-
         // query OpenAI for plant recognition
-        const run = await openai.beta.threads.runs.createAndPoll(thread.id, {
-            assistant_id: assistantId,
-        });
-        if (run.status !== 'completed') {
+        const recognizerRun = await openai.beta.threads.runs.createAndPoll(
+            recognizerThread.id,
+            {
+                assistant_id: recognizerAssistantId,
+            },
+        );
+        if (recognizerRun.status !== 'completed') {
             return createErrorReponse('OpenAI run not completed');
         }
-        const messages = await openai.beta.threads.messages.list(thread.id);
+        const messages = await openai.beta.threads.messages.list(
+            recognizerThread.id,
+        );
         const regocnizedPlant = JSON.parse(
             messages.data[0]?.content[0].text.value,
         );
@@ -49,7 +78,7 @@ Deno.serve(async (req) => {
         console.log('respose from openai', regocnizedPlant);
 
         // return 404 if no plant was recognized
-        if (!regocnizedPlant.was_recognized) {
+        if (regocnizedPlant.accuracy < 0.5) {
             return createErrorReponse('Plant not recognized', 404);
         }
 
@@ -69,11 +98,37 @@ Deno.serve(async (req) => {
             return createSuccessReponse(existingPlant.id);
         }
 
+        const plantExpertAssistantId = 'asst_r8VoFvQkVMCPIwIlLauiazJs';
+        const plantExpertThread = await openai.beta.threads.create({
+            messages: [
+                {
+                    role: 'user',
+                    content: regocnizedPlant.name_latin,
+                },
+            ],
+        });
+
+        const plantExpertRun = await openai.beta.threads.runs.createAndPoll(
+            plantExpertThread.id,
+            {
+                assistant_id: plantExpertAssistantId,
+            },
+        );
+        if (plantExpertRun.status !== 'completed') {
+            return createErrorReponse('OpenAI run not completed');
+        }
+        const plantExpertMessages = await openai.beta.threads.messages.list(
+            plantExpertThread.id,
+        );
+        const plantDetails = JSON.parse(
+            plantExpertMessages.data[0]?.content[0].text.value,
+        );
+
         // save unknown plant to the database
-        const savedPlantData = mapPlantData(regocnizedPlant);
+        const savedPlantData = mapPlantData(plantDetails);
         const { error: insertError } = await supabase
             .from('plants')
-            .insert(savedPlantData);
+            .insert(plantDetails);
         if (insertError) {
             console.error(insertError);
             return createErrorReponse('Supabase insert error');
@@ -81,7 +136,7 @@ Deno.serve(async (req) => {
 
         console.log(savedPlantData);
 
-        return createSuccessReponse(savedPlantData.id);
+        return createSuccessReponse(plantDetails.id, true);
     } catch (error) {
         console.error(error);
     }
@@ -101,10 +156,11 @@ const createErrorReponse = (error: string, code: number = 500) => {
     );
 };
 
-const createSuccessReponse = (id: string) => {
+const createSuccessReponse = (id: string, isNew = false) => {
     return new Response(
         JSON.stringify({
             id,
+            ...(isNew && { new: true }),
         }),
         {
             headers: { ...CONTENT_TYPE_HEADERS, ...CORS_HEADERS },
