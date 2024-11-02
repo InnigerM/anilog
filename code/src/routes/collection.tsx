@@ -1,4 +1,5 @@
 import FramedImage from '@/components/ui/framedImage';
+import { useSuspenseQueries } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
@@ -24,6 +25,8 @@ function CollectionComponent() {
     name: 'Baum',
     detailsPageUrl: ''
   }];
+
+  document.body.style.backgroundColor = "#FFEDE8";
 
   useEffect(() => {
     // load iamges from API
