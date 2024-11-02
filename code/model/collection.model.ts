@@ -1,4 +1,4 @@
-type Collection = {
+export type Collection = {
     id: number;
     name: string;
     lat: number;

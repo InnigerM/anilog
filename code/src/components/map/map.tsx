@@ -1,8 +1,8 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
-import { AreasOfInterest, LocationMarker } from '@/components/map';
+import {AreasOfInterest, Collections, LocationMarker} from '@/components/map';
 import React, { Suspense, useState } from 'react';
-import { Collections } from '@/components/map/collections';
 import { MapToggle } from '@/components/map/map-toggle';
+import {Collection} from "../../../model/collection.model";
 
 export function Map() {
     const [mapType, setMapType] = useState<'aoi' | 'collection'>('aoi');
