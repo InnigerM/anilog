@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { createFileRoute } from '@tanstack/react-router'
-import {MutableRefObject, useEffect, useRef, useState} from 'react'
-import {Button} from "@/components/ui/button";
-import {Camera, Search, X} from "lucide-react";
-import {cn} from "@/lib/utils";
+import * as React from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Camera, Search, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute('/camera')({
+export const Route = createFileRoute("/camera")({
   component: CameraComponent,
-})
+});
 
 function CameraComponent() {
   const videoRef: MutableRefObject<null | HTMLVideoElement> = useRef(null);
@@ -16,12 +16,12 @@ function CameraComponent() {
 
   const deviceSupported = () => {
     return (
-      'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices
-    )
-  }
+      "mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices
+    );
+  };
 
   useEffect(() => {
-    console.log(deviceSupported())
+    console.log(deviceSupported());
 
     const constraints = {
       video: {
@@ -35,28 +35,28 @@ function CameraComponent() {
           ideal: 1080,
           max: 1440,
         },
-        facingMode: 'environment',
+        facingMode: "environment",
       },
-    }
+    };
 
     navigator.mediaDevices.getUserMedia(constraints).then((result) => {
       if (videoRef.current) {
-        videoRef.current.srcObject = result
-        videoRef.current.play()
+        videoRef.current.srcObject = result;
+        videoRef.current.play();
       }
-    })
-  }, [videoRef])
+    });
+  }, [videoRef]);
 
   const takeScreenshot = async () => {
-    if (!videoRef.current || !canvasRef.current) return
+    if (!videoRef.current || !canvasRef.current) return;
 
-    const video = videoRef.current
-    const canvas = canvasRef.current
-    canvas.width = video.videoWidth
-    canvas.height = video.videoHeight
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
 
-    const context = canvas.getContext('2d')
-    context?.drawImage(video, 0, 0, canvas.width, canvas.height)
+    const context = canvas.getContext("2d");
+    context?.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     setShowCanvas(true);
 
@@ -69,48 +69,68 @@ function CameraComponent() {
     //     uploadFile(file)
     //   }
     // }, 'image/png')
-  }
+  };
 
   const uploadFile = async (file: File) => {
-    const formData = new FormData()
-    formData.append('file', file)
+    const formData = new FormData();
+    formData.append("file", file);
 
     try {
-      const response = await fetch('https://yourfileservice.com/upload', {
-        method: 'POST',
+      const response = await fetch("https://yourfileservice.com/upload", {
+        method: "POST",
         body: formData,
-      })
+      });
 
       if (response.ok) {
-        console.log('File uploaded successfully')
+        console.log("File uploaded successfully");
       } else {
-        console.error('Failed to upload file')
+        console.error("Failed to upload file");
       }
     } catch (error) {
-      console.error('Error uploading file:', error)
+      console.error("Error uploading file:", error);
     }
-  }
+  };
 
   return (
-    <div className='absolute top-0 left-0 w-screen h-screen'>
-      <div className='h-full w-full top-0 left-0 relative bg-black'>
-        {
-          showCanvas && <div className='absolute top-0 left-0 w-full justify-end flex p-4 z-50'>
-            <X className='cursor-pointer' onClick={() => setShowCanvas(false)}/>
+    <div className="absolute top-0 left-0 w-screen h-screen">
+      <div className="h-full w-full top-0 left-0 relative bg-black">
+        {showCanvas && (
+          <div className="absolute top-0 left-0 w-full justify-end flex p-4 z-50">
+            <X
+              className="cursor-pointer"
+              onClick={() => setShowCanvas(false)}
+            />
           </div>
-        }
-        <canvas ref={canvasRef} className={cn("absolute top-0 max-w-full", {'invisible': !showCanvas})}/>
-        <video ref={videoRef} className={cn("absolute top-0 max-w-full", {'invisible': showCanvas})}></video>
+        )}
+        <canvas
+          ref={canvasRef}
+          className={cn("absolute top-0 max-w-full", {
+            invisible: !showCanvas,
+          })}
+        />
+        <video
+          ref={videoRef}
+          className={cn("absolute top-0 max-w-full", { invisible: showCanvas })}
+        ></video>
       </div>
-      <div className='absolute w-full flex justify-center bottom-0 z-50 p-4'>
-        {!showCanvas && <Button className='p-4 rounded-full bg-red-700' onClick={() => takeScreenshot()}>
-          <Camera size={40}/>
-        </Button>}
-        {showCanvas && <Button className='p-4 rounded-full bg-red-700' onClick={() => takeScreenshot()}>
-          <Search size={40}/>
-        </Button>}
+      <div className="absolute w-full flex justify-center bottom-0 z-50 p-4">
+        {!showCanvas && (
+          <Button
+            className="p-4 rounded-full bg-red-700"
+            onClick={() => takeScreenshot()}
+          >
+            <Camera size={40} />
+          </Button>
+        )}
+        {showCanvas && (
+          <Button
+            className="p-4 rounded-full bg-red-700"
+            onClick={() => takeScreenshot()}
+          >
+            <Search size={40} />
+          </Button>
+        )}
       </div>
-
     </div>
-  )
+  );
 }
