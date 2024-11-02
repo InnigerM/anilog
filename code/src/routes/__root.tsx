@@ -29,6 +29,14 @@ function RootComponent() {
           About
         </Link>
         <Link
+          to="/camera"
+          activeProps={{
+            className: "font-bold",
+          }}
+        >
+          Camera
+        </Link>
+        <Link
           to="/map"
           activeProps={{
             className: "font-bold",
