@@ -22,8 +22,9 @@ export function useCreateScanMutation(
                 .insert([
                     {
                         ...scan,
-                        // @ts-ignore
-                        location: `POINT(${scan.location.lat} ${scan.location.lng})`,
+                        location: scan.location
+                            ? `POINT(${(scan.location as any).lat} ${(scan.location as any).lng})`
+                            : undefined,
                     },
                 ])
                 .select()
