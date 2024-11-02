@@ -50,6 +50,7 @@ export type Database = {
           name_latin: string | null
           native_habitat: string | null
           shiny: boolean | null
+          type: string | null
         }
         Insert: {
           color?: string | null
@@ -64,6 +65,7 @@ export type Database = {
           name_latin?: string | null
           native_habitat?: string | null
           shiny?: boolean | null
+          type?: string | null
         }
         Update: {
           color?: string | null
@@ -78,6 +80,7 @@ export type Database = {
           name_latin?: string | null
           native_habitat?: string | null
           shiny?: boolean | null
+          type?: string | null
         }
         Relationships: []
       }

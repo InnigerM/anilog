@@ -33,6 +33,36 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-flower {
+  &:before {
+    content: variables.$icon-flower;
+  }
+}
+.icon-plant {
+  &:before {
+    content: variables.$icon-plant;
+  }
+}
+.icon-tree {
+  &:before {
+    content: variables.$icon-tree;
+  }
+}
+.icon-family {
+  &:before {
+    content: variables.$icon-family;
+  }
+}
+.icon-color {
+  &:before {
+    content: variables.$icon-color;
+  }
+}
+.icon-endangered {
+  &:before {
+    content: variables.$icon-endangered;
+  }
+}
 .icon-arrow {
   &:before {
     content: variables.$icon-arrow;
@@ -58,10 +88,10 @@
         content: variables.$icon-star-pin;
     }
 }
-.icon-plant {
-    &:before {
-        content: variables.$icon-plant;
-    }
+.icon-little-plant {
+  &:before {
+    content: variables.$icon-little-plant;
+  }
 }
 .icon-camera {
     &:before {

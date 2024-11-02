@@ -40,7 +40,7 @@ export default function Navigation({ variant }: NavigationProps) {
                 </Link>
             )}
             <Link to="/collection" activeOptions={{ exact: true }}>
-                <i className="icon-plant text-4xl" />
+                <i className="icon-little-plant text-4xl" />
             </Link>
         </nav>
     );
