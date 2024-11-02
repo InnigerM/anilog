@@ -21,7 +21,7 @@ export function CollectionMarker({
   }
 
   const collectionIcon = icon({
-    iconUrl: "/src/components/map/Icon.png",
+    iconUrl: "/Icon.png",
     iconSize: [50, 90],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76],
