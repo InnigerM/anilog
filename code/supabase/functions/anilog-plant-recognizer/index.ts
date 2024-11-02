@@ -13,6 +13,7 @@ const CONTENT_TYPE_HEADERS = { 'Content-Type': 'application/json' };
 Deno.serve(async (req) => {
     try {
         const { imageUrl } = await req.json();
+        console.log('image recieved', imageUrl);
 
         // setup clients
         const openai = new OpenAI({
