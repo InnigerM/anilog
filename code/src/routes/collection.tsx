@@ -35,12 +35,12 @@ function CollectionComponent() {
   return (
     <div className="p-8">
       <div className='grid grid-cols-2 gap-8'>
-        {dummyImgUrls.map((plant) => {
-          return <div className="flex justify-center">
+        {dummyImgUrls.map((ooi) => {
+          return <div className="flex flex-col justify-center">
             <FramedImage
-              imgUrl={plant.imgUrl}
-              name={plant.name}
-              link={plant.detailsPageUrl} />
+              imgUrl={ooi.imgUrl}
+              link={ooi.detailsPageUrl} />
+            <span className="mt-4 text-center text-hibiscus-orange" >{ooi.name}</span>
           </div>
         })}
 
