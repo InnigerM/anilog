@@ -11,12 +11,19 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as MapImport } from './routes/map'
 import { Route as CollectionImport } from './routes/collection'
 import { Route as CameraImport } from './routes/camera'
 import { Route as IndexImport } from './routes/index'
 import { Route as PlantsPlantIdImport } from './routes/plants.$plantId'
 
 // Create/Update Routes
+
+const MapRoute = MapImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const CollectionRoute = CollectionImport.update({
   id: '/collection',
@@ -67,6 +74,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionImport
       parentRoute: typeof rootRoute
     }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapImport
+      parentRoute: typeof rootRoute
+    }
     '/plants/$plantId': {
       id: '/plants/$plantId'
       path: '/plants/$plantId'
@@ -83,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/camera': typeof CameraRoute
   '/collection': typeof CollectionRoute
+  '/map': typeof MapRoute
   '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
@@ -90,6 +105,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/camera': typeof CameraRoute
   '/collection': typeof CollectionRoute
+  '/map': typeof MapRoute
   '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
@@ -98,15 +114,16 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/camera': typeof CameraRoute
   '/collection': typeof CollectionRoute
+  '/map': typeof MapRoute
   '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/camera' | '/collection' | '/plants/$plantId'
+  fullPaths: '/' | '/camera' | '/collection' | '/map' | '/plants/$plantId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/camera' | '/collection' | '/plants/$plantId'
-  id: '__root__' | '/' | '/camera' | '/collection' | '/plants/$plantId'
+  to: '/' | '/camera' | '/collection' | '/map' | '/plants/$plantId'
+  id: '__root__' | '/' | '/camera' | '/collection' | '/map' | '/plants/$plantId'
   fileRoutesById: FileRoutesById
 }
 
@@ -114,6 +131,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CameraRoute: typeof CameraRoute
   CollectionRoute: typeof CollectionRoute
+  MapRoute: typeof MapRoute
   PlantsPlantIdRoute: typeof PlantsPlantIdRoute
 }
 
@@ -121,6 +139,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CameraRoute: CameraRoute,
   CollectionRoute: CollectionRoute,
+  MapRoute: MapRoute,
   PlantsPlantIdRoute: PlantsPlantIdRoute,
 }
 
@@ -137,6 +156,7 @@ export const routeTree = rootRoute
         "/",
         "/camera",
         "/collection",
+        "/map",
         "/plants/$plantId"
       ]
     },
@@ -148,6 +168,9 @@ export const routeTree = rootRoute
     },
     "/collection": {
       "filePath": "collection.tsx"
+    },
+    "/map": {
+      "filePath": "map.tsx"
     },
     "/plants/$plantId": {
       "filePath": "plants.$plantId.tsx"
