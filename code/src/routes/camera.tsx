@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Camera, Search, X } from 'lucide-react';
 import { cn, supabase } from '@/lib/utils';
 import { v4 as uuidv4 } from 'uuid';
+import { useCamera } from '@/lib/providers/camera-provider';
 
 export const Route = createFileRoute('/camera')({
     component: CameraComponent,
@@ -13,6 +14,7 @@ export const Route = createFileRoute('/camera')({
 function CameraComponent() {
     const videoRef: MutableRefObject<null | HTMLVideoElement> = useRef(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const { takeScreenshotRef } = useCamera();
     const [showCanvas, setShowCanvas] = useState(false);
     const [isAnalysing, setIsAnalysing] = useState(false);
     const navigate = useNavigate();
@@ -24,8 +26,44 @@ function CameraComponent() {
         );
     };
 
+    const takeScreenshot = async () => {
+        if (!videoRef.current || !canvasRef.current) return;
+
+        setIsAnalysing(true);
+
+        const video = videoRef.current;
+        const canvas = canvasRef.current;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        const context = canvas.getContext('2d');
+        context?.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        setShowCanvas(true);
+
+        const base64Image = canvas.toDataURL('image/png');
+        console.log('Base64 Image:', base64Image);
+
+        canvas.toBlob(async (blob) => {
+            if (blob) {
+                const file = new File([blob], `${uuidv4()}.png`, {
+                    type: 'image/png',
+                });
+                const imageUrl = await uploadFile(file);
+                if (imageUrl) {
+                    await analysePlant(imageUrl);
+                } else {
+                    setShowCanvas(false);
+                    setIsAnalysing(false);
+                }
+            }
+        }, 'image/png');
+    };
+
     useEffect(() => {
         console.log(deviceSupported());
+
+        takeScreenshotRef.current = takeScreenshot;
 
         const constraints = {
             video: {
@@ -49,41 +87,16 @@ function CameraComponent() {
                 videoRef.current.play();
             }
         });
-    }, [videoRef]);
 
-    const takeScreenshot = async () => {
-        if (!videoRef.current || !canvasRef.current) return;
-
-        setIsAnalysing(true);
-
-        const video = videoRef.current;
-        const canvas = canvasRef.current;
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-
-        const context = canvas.getContext('2d');
-        context?.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        setShowCanvas(true);
-
-        const base64Image = canvas.toDataURL('image/png'); // Get the image as base64
-        console.log('Base64 Image:', base64Image);
-
-        canvas.toBlob(async (blob) => {
-            if (blob) {
-                const file = new File([blob], `${uuidv4()}.png`, {
-                    type: 'image/png',
-                });
-                const imageUrl = await uploadFile(file);
-                if (imageUrl) {
-                    await analysePlant(imageUrl);
-                } else {
-                    setShowCanvas(false);
-                    setIsAnalysing(false);
-                }
+        return () => {
+            if (videoRef.current) {
+                const tracks = (
+                    videoRef.current.srcObject as MediaStream
+                ).getTracks();
+                tracks.forEach((track) => track.stop());
             }
-        }, 'image/png');
-    };
+        };
+    }, [videoRef, takeScreenshotRef]);
 
     const uploadFile = async (file: File): Promise<string | null> => {
         const { data } = await supabase.storage
@@ -167,24 +180,6 @@ function CameraComponent() {
                         invisible: showCanvas,
                     })}
                 ></video>
-            </div>
-            <div className="absolute w-full flex justify-center bottom-[100px] z-50 p-4">
-                {!showCanvas && (
-                    <Button
-                        className="p-4 rounded-full bg-red-700"
-                        onClick={() => takeScreenshot()}
-                    >
-                        <Camera size={40} />
-                    </Button>
-                )}
-                {showCanvas && (
-                    <Button
-                        className="p-4 rounded-full bg-red-700"
-                        onClick={() => takeScreenshot()}
-                    >
-                        <Search size={40} />
-                    </Button>
-                )}
             </div>
         </div>
     );
