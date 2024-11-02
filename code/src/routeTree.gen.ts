@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as MapImport } from './routes/map'
+import { Route as CollectionImport } from './routes/collection'
 import { Route as CameraImport } from './routes/camera'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
@@ -21,6 +22,12 @@ import { Route as IndexImport } from './routes/index'
 const MapRoute = MapImport.update({
   id: '/map',
   path: '/map',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CollectionRoute = CollectionImport.update({
+  id: '/collection',
+  path: '/collection',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,6 +74,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CameraImport
       parentRoute: typeof rootRoute
     }
+    '/collection': {
+      id: '/collection'
+      path: '/collection'
+      fullPath: '/collection'
+      preLoaderRoute: typeof CollectionImport
+      parentRoute: typeof rootRoute
+    }
     '/map': {
       id: '/map'
       path: '/map'
@@ -83,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/camera': typeof CameraRoute
+  '/collection': typeof CollectionRoute
   '/map': typeof MapRoute
 }
 
@@ -90,6 +105,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/camera': typeof CameraRoute
+  '/collection': typeof CollectionRoute
   '/map': typeof MapRoute
 }
 
@@ -98,15 +114,16 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/camera': typeof CameraRoute
+  '/collection': typeof CollectionRoute
   '/map': typeof MapRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/camera' | '/map'
+  fullPaths: '/' | '/about' | '/camera' | '/collection' | '/map'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/camera' | '/map'
-  id: '__root__' | '/' | '/about' | '/camera' | '/map'
+  to: '/' | '/about' | '/camera' | '/collection' | '/map'
+  id: '__root__' | '/' | '/about' | '/camera' | '/collection' | '/map'
   fileRoutesById: FileRoutesById
 }
 
@@ -114,6 +131,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   CameraRoute: typeof CameraRoute
+  CollectionRoute: typeof CollectionRoute
   MapRoute: typeof MapRoute
 }
 
@@ -121,6 +139,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CameraRoute: CameraRoute,
+  CollectionRoute: CollectionRoute,
   MapRoute: MapRoute,
 }
 
@@ -137,6 +156,7 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/camera",
+        "/collection",
         "/map"
       ]
     },
@@ -148,6 +168,9 @@ export const routeTree = rootRoute
     },
     "/camera": {
       "filePath": "camera.tsx"
+    },
+    "/collection": {
+      "filePath": "collection.tsx"
     },
     "/map": {
       "filePath": "map.tsx"
