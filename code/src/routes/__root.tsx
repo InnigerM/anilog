@@ -1,58 +1,38 @@
-import * as React from "react";
-import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import "../index.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import * as React from 'react';
+import {
+    Link,
+    Outlet,
+    createRootRoute,
+    useRouterState,
+} from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import '../index.css';
+import Navigation from '@/components/navigation/navigation';
+import { View } from '@/lib/types';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
 export const Route = createRootRoute({
-  component: RootComponent,
+    component: RootComponent,
 });
 
 function RootComponent() {
-  return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <div className="p-2 flex gap-2 text-lg">
-          <Link
-            to="/"
-            activeProps={{
-              className: "font-bold",
-            }}
-            activeOptions={{ exact: true }}
-          >
-            Home
-          </Link>{" "}
-          <Link
-            to="/about"
-            activeProps={{
-              className: "font-bold",
-            }}
-          >
-            About
-          </Link>
-          <Link
-            to="/camera"
-            activeProps={{
-              className: "font-bold",
-            }}
-          >
-            Camera
-          </Link>
-          <Link
-            to="/map"
-            activeProps={{
-              className: "font-bold",
-            }}
-          >
-            Map
-          </Link>
-        </div>
-        <hr />
-        <Outlet />
-        <TanStackRouterDevtools position="bottom-right" />
-      </QueryClientProvider>
-    </>
-  );
+    const router = useRouterState();
+
+    const view =
+        router.location.pathname === '/'
+            ? 'MAP'
+            : (router.location.pathname
+                  .replace(/^\/+/, '')
+                  .toUpperCase() as View);
+
+    return (
+        <>
+            <QueryClientProvider client={queryClient}>
+                <Outlet />
+                <Navigation variant={view} />
+            </QueryClientProvider>
+        </>
+    );
 }
