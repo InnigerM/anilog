@@ -1,10 +1,11 @@
 
 type FramedImageProps = {
   imgUrl: string;
-  width: number;
+  name: string;
+  link: string;
 };
 
-export default function FramedImage({ imgUrl, width }: FramedImageProps) {
+export default function FramedImage({ imgUrl, name, link }: FramedImageProps) {
 
   const framePath = "";
 
