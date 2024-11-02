@@ -17,7 +17,7 @@ export function LocationMarker() {
         iconUrl: '/LocationMarker.png',
         iconSize: [40, 40],
         iconAnchor: [20, 40],
-        popupAnchor: [-3, -76],
+        popupAnchor: [0, -45],
     });
 
     useEffect(() => {

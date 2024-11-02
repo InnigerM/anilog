@@ -17,16 +17,18 @@ export function MapToggle({ mapType, setMapType }: MapToggleProps) {
             }}
         >
             <ToggleGroupItem
-                className="rounded-full p-5 opacity-40 bg-green-700 text-yellow-400 data-[state=on]:opacity-100 data-[state=on]:bg-green-700 data-[state=on]:text-yellow-400"
+                className="rounded-full text-3xl h-16 p-3 opacity-50 bg-blossom-pink text-honeysuckle-yellow data-[state=on]:opacity-100 data-[state=on]:bg-blossom-pink data-[state=on]:text-honeysuckle-yellow"
                 value="aoi"
+                disabled={mapType === 'aoi'}
             >
-                A
+                <div className="icon-map"></div>
             </ToggleGroupItem>
             <ToggleGroupItem
-                className="rounded-full p-5 opacity-40 bg-green-700 text-yellow-400 data-[state=on]:opacity-100 data-[state=on]:bg-green-700 data-[state=on]:text-yellow-400"
+                className="rounded-full text-3xl h-16 p-3 opacity-50 bg-blossom-pink text-honeysuckle-yellow data-[state=on]:opacity-100 data-[state=on]:bg-blossom-pink data-[state=on]:text-honeysuckle-yellow"
                 value="collection"
+                disabled={mapType === 'collection'}
             >
-                C
+                <div className="icon-star-pin"></div>
             </ToggleGroupItem>
         </ToggleGroup>
     );
