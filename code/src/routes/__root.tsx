@@ -25,6 +25,7 @@ function RootComponent() {
             ? 'MAP'
             : (router.location.pathname
                   .replace(/^\/+/, '')
+                  .split('/')[0]
                   .toUpperCase() as View);
 
     return (
