@@ -1,9 +1,18 @@
 @import 'styles/anilog-icons.scss';
+@import '@fontsource/schoolbell';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer base {
+    @font-face {
+        font-family: 'Chalkboard';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(/fonts/chalkboard.ttf) format('ttf');
+    }
+
     :root {
         --background: 0 0% 100%;
         --foreground: 0 0% 3.9%;
