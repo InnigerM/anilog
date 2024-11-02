@@ -60,8 +60,8 @@
 }
 
 nav {
-    --mask: linear-gradient(to bottom, #0000 30px, #000 0),
-        radial-gradient(30px, #000 100%, #0000) top/55.5px 60px;
+    --mask: linear-gradient(to bottom, #0000 20px, #000 0),
+        radial-gradient(20px, #000 98%, #0000) top/37px 40px;
     -webkit-mask: var(--mask);
     mask: var(--mask);
 }
