@@ -21,17 +21,27 @@ export function getUserFromLocalStorage() {
     return JSON.parse(userItem) as UserResponse;
 }
 
-export function getCurrentPosition(
-    callback: (position: LatLng | null) => void,
+export async function getCurrentPosition(
+    callback: (position: LatLng | null) => Promise<void>,
 ) {
     if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            callback(
-                new LatLng(position.coords.latitude, position.coords.longitude),
-            );
-        });
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                console.log(
+                    `current position is ${position}, executing callback.`,
+                );
+                await callback(
+                    new LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude,
+                    ),
+                );
+            },
+            (error) => console.log(error),
+            { timeout: 5000 },
+        );
     } else {
-        console.log('no access to geolocation');
-        callback(null);
+        console.log('no access to geolocation, executing callback');
+        await callback(null);
     }
 }
