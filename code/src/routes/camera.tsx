@@ -1,10 +1,13 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
-import { cn, supabase } from '@/lib/utils';
+import { cn, getUserFromLocalStorage, supabase } from '@/lib/utils';
 import { v4 as uuidv4 } from 'uuid';
 import { useCamera } from '@/lib/providers/camera-provider';
 import { toast } from 'sonner';
+import { useCreateScanMutation } from '@/lib/api/scans';
+import { LatLng } from 'leaflet';
+import { useLocation } from '@/lib/hooks/use-location';
 import { LoadingOverlay } from '@/components/ui/loading-overlay';
 
 export const Route = createFileRoute('/camera')({
@@ -18,6 +21,10 @@ function CameraComponent() {
     const [showCanvas, setShowCanvas] = useState(false);
     const [isAnalysing, setIsAnalysing] = useState(false);
     const navigate = useNavigate();
+    const createScanMutation = useCreateScanMutation();
+    const location = useLocation();
+
+    console.log(location);
 
     const deviceSupported = () => {
         return (
@@ -138,6 +145,15 @@ function CameraComponent() {
             if (!data.id) {
                 throw Error('Plant was NOT recognized!');
             }
+
+            console.log(location);
+            createScanMutation.mutateAsync({
+                imageUrl,
+                location,
+                plantId: data.id,
+                // @ts-expect-error only logged in users can access this route, thus we know that the user is defined
+                userId: getUserFromLocalStorage().id,
+            });
 
             navigate({
                 to: '/plants/$plantId',

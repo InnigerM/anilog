@@ -81,6 +81,48 @@ export type Database = {
         }
         Relationships: []
       }
+      scans: {
+        Row: {
+          created_at: string
+          id: number
+          imageUrl: string
+          location: unknown | null
+          plantId: string
+          userId: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          imageUrl: string
+          location?: unknown | null
+          plantId: string
+          userId: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          imageUrl?: string
+          location?: unknown | null
+          plantId?: string
+          userId?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scans_plantId_fkey"
+            columns: ["plantId"]
+            isOneToOne: false
+            referencedRelation: "plants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scans_userId_fkey"
+            columns: ["userId"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user: {
         Row: {
           created_at: string
