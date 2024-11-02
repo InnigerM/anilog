@@ -1,6 +1,5 @@
 import FramedImage from '@/components/ui/framedImage';
 import { createFileRoute } from '@tanstack/react-router'
-import { RecognizedPlant } from 'model/recognized-plant.model';
 import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/collection')({
@@ -34,10 +33,12 @@ function CollectionComponent() {
     <div className="p-8">
       <div className='grid grid-cols-2 gap-8'>
         {dummyImgUrls.map((plant) => {
-          return <FramedImage
-            imgUrl={plant.imgUrl}
-            name={plant.name}
-            link={plant.detailsPageUrl} />
+          return <div className="flex justify-center">
+            <FramedImage
+              imgUrl={plant.imgUrl}
+              name={plant.name}
+              link={plant.detailsPageUrl} />
+          </div>
         })}
 
       </div>
