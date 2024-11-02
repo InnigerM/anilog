@@ -175,6 +175,7 @@ function CameraComponent() {
                 />
                 <video
                     ref={videoRef}
+                    playsInline
                     className={cn('absolute top-0 max-w-full', {
                         invisible: showCanvas,
                     })}
