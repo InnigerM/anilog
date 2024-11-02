@@ -9,7 +9,7 @@ export function MapToggle({ mapType, setMapType }: MapToggleProps) {
     return (
         <ToggleGroup
             size="lg"
-            className="fixed h-10 right-3 bottom-24 z-[1001] flex-col"
+            className="fixed h-10 right-3 bottom-36 z-[1001] flex-col"
             type="single"
             value={mapType}
             onValueChange={(value: 'aoi' | 'collection') => {
