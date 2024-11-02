@@ -158,7 +158,7 @@ function CameraComponent() {
             navigate({
                 to: '/plants/$plantId',
                 params: { plantId: data.id },
-                ...(data.new && { search: { new: true } }),
+                ...(data.new && { search: { isNew: true } }),
             });
         } catch (error) {
             console.error(error);

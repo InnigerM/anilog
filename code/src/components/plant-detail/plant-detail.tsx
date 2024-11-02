@@ -10,6 +10,7 @@ type PlantDetailProps = {
 
 export default function PlantDetail({ plantId }: PlantDetailProps) {
     const { data: plant } = useSuspenseQuery(getPlantById(plantId));
+
     return (
         <div className="flex flex-col items-center px-8 bg-peach-cream pb-16 h-content overflow-scroll">
             <img
