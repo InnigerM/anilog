@@ -1,5 +1,6 @@
 import { CollectionMarker } from '@/components/map/collection-marker';
 import React from 'react';
+import {Collection} from "@/model/collection.model";
 
 type CollectionProps = {
     collections: Collection[];

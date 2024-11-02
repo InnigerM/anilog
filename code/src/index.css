@@ -1,4 +1,5 @@
 @import 'styles/anilog-icons.scss';
+@import 'styles/components/plant-detail.scss';
 @import '@fontsource/schoolbell';
 
 @tailwind base;
