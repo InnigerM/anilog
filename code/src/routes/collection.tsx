@@ -33,7 +33,7 @@ function CollectionComponent() {
   });
 
   return (
-    <div className="p-8">
+    <div className="pt-20 pb-8 px-8">
       <div className='grid grid-cols-2 gap-8'>
         {dummyImgUrls.map((ooi) => {
           return <div className="flex flex-col justify-center">
