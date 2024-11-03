@@ -13,13 +13,11 @@ export const getUserByEmail = (email: string) =>
     queryOptions({
         queryKey: ['user', email],
         queryFn: async () => {
-            const { data, error, count } = await supabase
+            const { data } = await supabase
                 .from('user')
                 .select('*')
                 .eq('email', email)
                 .single();
-
-            console.log(data, error, count);
 
             return data as UserResponse;
         },
