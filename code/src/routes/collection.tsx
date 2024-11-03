@@ -25,7 +25,7 @@ function CollectionComponent() {
                         scans.length > 0 && (
                             <>
                             <div className="gap-8 flex flex-col">
-                                {scans?.filter((_, i) => i % 2 === 1).map((ooi, index) => {
+                                {scans?.filter((_, i) => i % 2 === 0).map((ooi, index) => {
                                     return (
                                         <div className="flex flex-col">
                                             <FramedImage
@@ -45,7 +45,7 @@ function CollectionComponent() {
                                 })}
                             </div>
                             <div className="gap-8 flex flex-col mt-14">
-                                {scans?.filter((_, i) => i % 2 === 0).map((ooi, index) => {
+                                {scans?.filter((_, i) => i % 2 === 1).map((ooi, index) => {
                                     return (
                                         <div className="flex flex-col">
                                             <FramedImage

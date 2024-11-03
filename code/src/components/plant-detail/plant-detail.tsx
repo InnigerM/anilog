@@ -20,7 +20,7 @@ export default function PlantDetail({ plantId }: PlantDetailProps) {
     );
 
     return (
-        <div className="flex flex-col items-center relative px-8 bg-peach-cream pt-24 pb-16 h-content overflow-scroll">
+        <div className="flex flex-col items-center relative px-8 bg-peach-cream pt-24 max-w-[500px] mx-auto pb-16 h-content overflow-scroll">
             <Link className="icon-arrow absolute top-24 text-4xl left-6 " to="/collection"/>
             <SpecialPlants plantName={plant?.name_latin} />
             <FramedImage imgUrl={plant!.scans[plant.scans.length - 1].imageUrl} className="w-56 h-72" imageClasses="w-[157px] h-[236px]"/>
