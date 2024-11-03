@@ -62,8 +62,10 @@ export function Registration() {
         }
     }
 
+    document.body.style.backgroundColor = "#F2F6FF";
+
     return (
-        <div className="mx-8 my-4">
+        <div className="mx-8 my-24 text-cornflower-blue">
             {isLoading && <Loading />}
 
             <H1>Login</H1>
@@ -79,9 +81,9 @@ export function Registration() {
                         name="firstName"
                         render={({ field }) => (
                             <Form.Item>
-                                <Form.Label>Firstname</Form.Label>
-                                <Form.Control>
-                                    <Input placeholder="Firstname" {...field} />
+                                <Form.Label className='text-cotton-light-gray'>Firstname</Form.Label>
+                                <Form.Control className='shadow-none border-none'>
+                                    <Input placeholder="Ash" {...field} />
                                 </Form.Control>
                                 <Form.Message />
                             </Form.Item>
@@ -93,9 +95,9 @@ export function Registration() {
                         name="lastName"
                         render={({ field }) => (
                             <Form.Item>
-                                <Form.Label>Lastname (optional)</Form.Label>
-                                <Form.Control>
-                                    <Input placeholder="Lastname" {...field} />
+                                <Form.Label className='text-cotton-light-gray'>Lastname (optional)</Form.Label>
+                                <Form.Control className='shadow-none border-none'>
+                                    <Input placeholder="Ketchum" {...field} />
                                 </Form.Control>
                                 <Form.Message />
                             </Form.Item>
@@ -107,16 +109,16 @@ export function Registration() {
                         name="email"
                         render={({ field }) => (
                             <Form.Item>
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control>
-                                    <Input placeholder="Email" {...field} />
+                                <Form.Label className='text-cotton-light-gray'>Email</Form.Label>
+                                <Form.Control className='shadow-none border-none'>
+                                    <Input placeholder="ash.ketchum@anilog.com" {...field} />
                                 </Form.Control>
                                 <Form.Message />
                             </Form.Item>
                         )}
                     />
 
-                    <Button>Log In</Button>
+                    <Button className='shadow-none bg-circled bg-no-repeat bg-center h-16'>Log In</Button>
                 </form>
             </Form.Root>
         </div>

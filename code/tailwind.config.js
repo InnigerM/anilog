@@ -4,6 +4,9 @@ module.exports = {
     content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
     theme: {
         extend: {
+            scale: {
+                "1200": "12.0"
+            },
             height: {
                 content: 'calc(100vh - 70px)'
             },
@@ -22,12 +25,16 @@ module.exports = {
                 'black-pepper': '#222222',
                 'dusty-miller-gray': '#6B6969',
                 'cotton-light-gray': '#A9A9A9',
-                'peach-cream': '#FFEDE8'
+                'peach-cream': '#FFEDE8',
+                'cornflower-blue': '#4274FF'
             },
             fontFamily: {
                 sans: ['Schoolbell', 'cursive'],
                 chalkboard: 'Chalkboard',
             },
+            backgroundImage: {
+                circled: "url('/button-stroke.svg')"
+            }
         },
     },
     plugins: [require('tailwindcss-animate')],

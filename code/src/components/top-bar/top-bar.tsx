@@ -15,6 +15,7 @@ export default function TopBar({ variant }: TopBarProps) {
                 variant === 'CAMERA' && 'bg-mint-green',
                 variant === 'COLLECTION' && 'bg-hibiscus-orange',
                 variant === 'PLANTS' && 'bg-hibiscus-orange',
+                variant === 'REGISTER' && 'bg-cornflower-blue'
             )}
         >
             <img src="/logo/logo-mini.svg" alt="" />
