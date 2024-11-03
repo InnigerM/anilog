@@ -13,7 +13,7 @@ export function Leaderboard() {
             <H1 className="mx-8 mb-4">Anilog Ranking</H1>
             {leaderboard
                 .sort((a, b) =>
-                    b.points && a.points ? b.points - a.points : 0,
+                    ((typeof b.points === 'number' && typeof a.points === 'number') ? (b.points - a.points) : 0),
                 )
                 .map((entry, index: number) => (
                     <div

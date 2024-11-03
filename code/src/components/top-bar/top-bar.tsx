@@ -13,7 +13,11 @@ export default function TopBar({ variant }: TopBarProps) {
     const { data: leaderboard } = useSuspenseQuery(getLeaderboard());
     const myRank = leaderboard
         ? leaderboard
-              .sort((a, b) => (b.points && a.points ? b.points - a.points : 0))
+              .sort((a, b) =>
+                  typeof b.points === 'number' && typeof a.points === 'number'
+                      ? b.points - a.points
+                      : 0,
+              )
               .map((entry, index: number) => ({ ...entry, rank: index }))
               .find((entry) => entry.user_id === user?.id)
         : '';

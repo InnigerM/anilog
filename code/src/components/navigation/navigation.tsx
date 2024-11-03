@@ -63,6 +63,9 @@ export default function Navigation({ variant }: NavigationProps) {
                     {router.location.pathname !== '/camera' ? (
                         <Link to="/leaderboard" activeOptions={{ exact: true }}>
                             <i className="icon-leaderboard text-4xl text-honeysuckle-yellow" />
+                            {router.location.pathname === '/leaderboard' && (
+                                <img src="/img/underline.svg" alt="" />
+                            )}
                         </Link>
                     ) : (
                         ''
