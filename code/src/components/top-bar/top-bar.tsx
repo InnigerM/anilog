@@ -1,12 +1,23 @@
 import { View } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import { cn, getUserFromLocalStorage } from '@/lib/utils';
 import React from 'react';
-import { H1 } from "@/components/ui/typography";
+import { H1 } from '@/components/ui/typography';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { getLeaderboard } from '@/lib/api/leaderboard';
 
 type TopBarProps = {
     variant: View;
 };
 export default function TopBar({ variant }: TopBarProps) {
+    const user = getUserFromLocalStorage();
+    const { data: leaderboard } = useSuspenseQuery(getLeaderboard());
+    const myRank = leaderboard
+        ? leaderboard
+              .sort((a, b) => (b.points && a.points ? b.points - a.points : 0))
+              .map((entry, index: number) => ({ ...entry, rank: index }))
+              .find((entry) => entry.user_id === user?.id)
+        : '';
+
     return (
         <div
             id="top-bar"
@@ -23,7 +34,17 @@ export default function TopBar({ variant }: TopBarProps) {
             <div className="absolute left-4">
                 <img src="/logo/logo-mini.svg" alt="" />
             </div>
-            <H1 className="text-honeysuckle-yellow !mb-0 w-full text-center"><i className="icon-leaderboard mr-2"></i>Rank 5</H1>
+
+            <H1 className="text-honeysuckle-yellow !mb-0 w-full text-center">
+                {myRank?.rank ? (
+                    <span>
+                        <i className="icon-leaderboard mr-2"></i>Rank{' '}
+                        {myRank?.rank}
+                    </span>
+                ) : (
+                    'Not ranked yet'
+                )}
+            </H1>
         </div>
     );
 }
