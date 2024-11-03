@@ -1,4 +1,5 @@
 import {
+    queryOptions,
     useMutation,
     UseMutationOptions,
     useQueryClient,
@@ -43,3 +44,16 @@ export function useCreateScanMutation(
         ...opts,
     });
 }
+
+export const getScansForUser = (userId: number) =>
+    queryOptions({
+        queryKey: ['scans', userId],
+        queryFn: async () => {
+            const { data } = await supabase
+                .from('scans')
+                .select('*, plants(*)')
+                .eq('userId', userId);
+
+            return data ?? null;
+        },
+    });
