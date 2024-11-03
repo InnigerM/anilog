@@ -19,7 +19,7 @@ export default function Navigation({ variant }: NavigationProps) {
     return (
         <nav
             className={cn(
-                'px-3 pb-3 pt-7 flex gap-2 text-lg fixed bottom-0 w-full justify-around transition-colors duration-300 bg-gray-800 text-white z-[1000]',
+                'px-3 pb-3 pt-7 flex gap-2 text-lg fixed bottom-0 w-full justify-around transition-colors duration-300  text-white z-[1000]',
                 variant === 'MAP' && 'bg-blossom-pink',
                 variant === 'CAMERA' && 'bg-mint-green',
                 variant === 'COLLECTION' && 'bg-hibiscus-orange',
@@ -27,20 +27,20 @@ export default function Navigation({ variant }: NavigationProps) {
             )}
         >
             <Link to="/">
-                <i className="icon-map text-4xl" />
+                <i className="icon-map text-4xl text-honeysuckle-yellow" />
             </Link>
             {router.location.pathname === '/camera' ? (
                 <i
                     onClick={handleScreenshot}
-                    className="icon-shutter text-4xl cursor-pointer"
+                    className="icon-shutter text-4xl  text-honeysuckle-yellow cursor-pointer"
                 />
             ) : (
                 <Link to="/camera">
-                    <i className="icon-camera text-4xl" />
+                    <i className="icon-camera text-4xl text-honeysuckle-yellow" />
                 </Link>
             )}
             <Link to="/collection" activeOptions={{ exact: true }}>
-                <i className="icon-little-plant text-4xl" />
+                <i className="icon-little-plant text-4xl text-honeysuckle-yellow" />
             </Link>
         </nav>
     );

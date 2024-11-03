@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CameraProvider } from '@/lib/providers/camera-provider';
 import { Toaster } from 'sonner';
 import { USER_LOCAL_STORAGE_KEY } from '@/lib/api/user';
+import TopBar from '@/components/top-bar/top-bar';
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ function RootComponent() {
         <>
             <QueryClientProvider client={queryClient}>
                 <CameraProvider>
+                    <TopBar variant={view} />
                     <Outlet />
                     <Navigation variant={view} />
                     <Toaster />
