@@ -10,20 +10,29 @@ export const Route = createFileRoute('/collection')({
 });
 
 function CollectionComponent() {
+    document.body.style.backgroundColor = '#FFEDE8';
+
     const user = getUserFromLocalStorage();
     const { data: scans } = useSuspenseQuery(getScansForUser(user!.id));
-
-    document.body.style.backgroundColor = '#FFEDE8';
 
     return (
         <div className="pt-20 pb-8 px-8">
             <div className="grid grid-cols-2 gap-8">
                 <Suspense>
-                    {scans &&
-                        scans.length > 0 &&
-                        scans?.map((ooi) => {
-                            return (
-                                <div className="flex flex-col justify-center">
+                    {scans && scans.length > 0 ? (
+                        scans
+                            .filter(
+                                (scan, index, self) =>
+                                    index ===
+                                    self.findIndex(
+                                        (s) => s.plantId === scan.plantId,
+                                    ),
+                            )
+                            .map((ooi) => (
+                                <div
+                                    key={ooi.plantId}
+                                    className="flex flex-col justify-center"
+                                >
                                     <FramedImage
                                         imgUrl={ooi.imageUrl}
                                         linkOptions={linkOptions({
@@ -37,10 +46,8 @@ function CollectionComponent() {
                                         {ooi.plants?.name_common}
                                     </span>
                                 </div>
-                            );
-                        })}
-
-                    {(!scans || scans.length === 0) && (
+                            ))
+                    ) : (
                         <p className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-hibiscus-orange">
                             No plants scanned yet... {`:)`}
                         </p>

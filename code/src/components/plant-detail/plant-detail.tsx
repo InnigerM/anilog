@@ -22,7 +22,7 @@ export default function PlantDetail({ plantId }: PlantDetailProps) {
             <SpecialPlants plantName={plant?.name_latin} />
             <img
                 className="mt-6 max-h-[254px] h-full object-cover w-auto"
-                src={plant?.scans[0].imageUrl}
+                src={plant?.scans[plant.scans.length - 1].imageUrl}
                 width={170}
                 height={254}
             />
