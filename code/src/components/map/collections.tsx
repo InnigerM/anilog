@@ -1,22 +1,29 @@
 import { CollectionMarker } from '@/components/map/collection-marker';
-import React from 'react';
-import {Collection} from "@/model/collection.model";
+import { getScansByUserId } from '@/lib/api/scans';
+import { UserResponse } from '@/lib/api/user';
+import { getUserFromLocalStorage } from '@/lib/utils';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-type CollectionProps = {
-    collections: Collection[];
+type CollectionsProps = {
+    user: UserResponse;
 };
 
-export function Collections({ collections }: CollectionProps) {
-    const collectionList = collections.map((collection: Collection) => (
-        <CollectionMarker
-            key={collection.id}
-            lat={collection.lat}
-            lng={collection.lng}
-            name={collection.name}
-            category={collection.category}
-            id={collection.id}
-        />
-    ));
+export function Collections({ user }: CollectionsProps) {
+    const {
+        data: scans,
+        isPending,
+        isError,
+    } = useSuspenseQuery(getScansByUserId(user.id));
 
-    return <div>{collectionList}</div>;
+    return (
+        <div>
+            {!isPending &&
+                !isError &&
+                scans &&
+                scans.map(
+                    (scan) =>
+                        scan && scan.plant && <CollectionMarker {...scan} />,
+                )}
+        </div>
+    );
 }

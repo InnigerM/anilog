@@ -21,8 +21,8 @@ export default function PlantDetail({ plantId }: PlantDetailProps) {
         <div className="flex flex-col items-center px-8 bg-peach-cream py-16 h-content overflow-scroll">
             <SpecialPlants plantName={plant?.name_latin} />
             <img
-                className="mt-6"
-                src={plant?.scans[0].imageUrl}
+                className="mt-6 max-h-[254px] h-full object-cover w-auto"
+                src={plant?.scans[plant.scans.length - 1].imageUrl}
                 width={170}
                 height={254}
             />

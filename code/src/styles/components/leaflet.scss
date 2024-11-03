@@ -1,0 +1,14 @@
+.leaflet-control-container {
+  .leaflet-top {
+    top: 4rem;
+
+    .leaflet-bar {
+      border: none;
+
+      .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+        background-color: #FFB0E7;
+        color: white;
+      }
+    }
+  }
+}
