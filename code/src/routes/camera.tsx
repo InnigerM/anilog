@@ -156,7 +156,7 @@ function CameraComponent() {
                     userId: getUserFromLocalStorage().id,
                 });
 
-                updateLeaderboard(data.id, data.new);
+                await updateLeaderboard(data.id, data.new);
 
                 navigate({
                     to: '/plants/$plantId',
