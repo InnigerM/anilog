@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as MapImport } from './routes/map'
+import { Route as LeaderboardImport } from './routes/leaderboard'
 import { Route as CollectionImport } from './routes/collection'
 import { Route as CameraImport } from './routes/camera'
 import { Route as IndexImport } from './routes/index'
@@ -22,6 +23,12 @@ import { Route as PlantsPlantIdImport } from './routes/plants.$plantId'
 const MapRoute = MapImport.update({
   id: '/map',
   path: '/map',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LeaderboardRoute = LeaderboardImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionImport
       parentRoute: typeof rootRoute
     }
+    '/leaderboard': {
+      id: '/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof LeaderboardImport
+      parentRoute: typeof rootRoute
+    }
     '/map': {
       id: '/map'
       path: '/map'
@@ -97,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/camera': typeof CameraRoute
   '/collection': typeof CollectionRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/map': typeof MapRoute
   '/plants/$plantId': typeof PlantsPlantIdRoute
 }
@@ -105,6 +120,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/camera': typeof CameraRoute
   '/collection': typeof CollectionRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/map': typeof MapRoute
   '/plants/$plantId': typeof PlantsPlantIdRoute
 }
@@ -114,16 +130,36 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/camera': typeof CameraRoute
   '/collection': typeof CollectionRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/map': typeof MapRoute
   '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/camera' | '/collection' | '/map' | '/plants/$plantId'
+  fullPaths:
+    | '/'
+    | '/camera'
+    | '/collection'
+    | '/leaderboard'
+    | '/map'
+    | '/plants/$plantId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/camera' | '/collection' | '/map' | '/plants/$plantId'
-  id: '__root__' | '/' | '/camera' | '/collection' | '/map' | '/plants/$plantId'
+  to:
+    | '/'
+    | '/camera'
+    | '/collection'
+    | '/leaderboard'
+    | '/map'
+    | '/plants/$plantId'
+  id:
+    | '__root__'
+    | '/'
+    | '/camera'
+    | '/collection'
+    | '/leaderboard'
+    | '/map'
+    | '/plants/$plantId'
   fileRoutesById: FileRoutesById
 }
 
@@ -131,6 +167,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CameraRoute: typeof CameraRoute
   CollectionRoute: typeof CollectionRoute
+  LeaderboardRoute: typeof LeaderboardRoute
   MapRoute: typeof MapRoute
   PlantsPlantIdRoute: typeof PlantsPlantIdRoute
 }
@@ -139,6 +176,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CameraRoute: CameraRoute,
   CollectionRoute: CollectionRoute,
+  LeaderboardRoute: LeaderboardRoute,
   MapRoute: MapRoute,
   PlantsPlantIdRoute: PlantsPlantIdRoute,
 }
@@ -156,6 +194,7 @@ export const routeTree = rootRoute
         "/",
         "/camera",
         "/collection",
+        "/leaderboard",
         "/map",
         "/plants/$plantId"
       ]
@@ -168,6 +207,9 @@ export const routeTree = rootRoute
     },
     "/collection": {
       "filePath": "collection.tsx"
+    },
+    "/leaderboard": {
+      "filePath": "leaderboard.tsx"
     },
     "/map": {
       "filePath": "map.tsx"
