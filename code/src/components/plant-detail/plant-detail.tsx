@@ -18,7 +18,7 @@ export default function PlantDetail({ plantId }: PlantDetailProps) {
     );
 
     return (
-        <div className="flex flex-col items-center px-8 bg-peach-cream pb-16 h-content overflow-scroll">
+        <div className="flex flex-col items-center px-8 bg-peach-cream py-16 h-content overflow-scroll">
             <SpecialPlants plantName={plant?.name_latin} />
             <img
                 className="mt-6"
