@@ -1,5 +1,5 @@
 import { LatLngExpression } from 'leaflet';
-import { CircleMarker } from 'react-leaflet';
+import { Circle } from 'react-leaflet';
 
 type AreaOfInterestProps = {
     position: LatLngExpression;
@@ -12,7 +12,7 @@ export function AreaOfInterest({
 }: AreaOfInterestProps) {
     return (
         <>
-            <CircleMarker center={position} radius={100} color={color} />
+            <Circle center={position} radius={500} color={color} />
         </>
     );
 }
