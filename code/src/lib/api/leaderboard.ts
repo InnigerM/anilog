@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/utils';
 import { USER_LOCAL_STORAGE_KEY } from './user';
-import { getScansForUser, ScanResponse } from './scans';
-import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import { queryOptions } from '@tanstack/react-query';
+import { ScanResponse } from './scans';
 
 export const getLeaderboard = () =>
     queryOptions({
@@ -26,37 +26,57 @@ export const updateLeaderboard = async (
     }
     const user = JSON.parse(userString);
 
-    const isFirstScanForUser = isFirstScan(user.id, plantId);
-    if (!isFirstScanForUser) {
-        return;
-    }
-
-    const points = getPointsForPlant(plantId, isNewPlant);
-    return updateLeaderboardDatabase(points);
+    const points = await getPointsForPlant(plantId, user.id, isNewPlant);
+    return updateLeaderboardDatabase(points, user);
 };
 
-const isFirstScan = (userId: number, plantId: string) => {
-    const { data: userScans } = useSuspenseQuery(getScansForUser(userId));
+const getScansForUser = async (userId: number): Promise<ScanResponse[]> => {
+    const { data, error } = await supabase
+        .from('scans')
+        .select('*')
+        .eq('userId', userId);
+
+    if (error) {
+        throw new Error('Error fetching scans');
+    }
+
+    return data;
+};
+
+const isFirstScan = async (
+    userId: number,
+    plantId: string,
+): Promise<boolean> => {
+    const userScans = await getScansForUser(userId);
     if (!userScans) {
         return true;
     }
-    return userScans.some((scan) => scan.plantId === plantId);
+    return !userScans.some((scan) => scan.plantId !== plantId);
 };
 
-const getPointsForPlant = (plantId: string, isNewPlant: boolean) => {
-    switch (plantId) {
-        case 'Camellia sinensis':
-            return 10;
-        case 'Cannabis':
-        case 'Cannabis sativa':
-        case 'Cannabis indica':
-            return 420;
-        default:
-            return 50;
+const getPointsForPlant = async (
+    plantId: string,
+    userId: number,
+    isNewPlant: boolean,
+): Promise<number> => {
+    if (isNewPlant) {
+        return 100;
     }
+    const isFirstScanForUser = await isFirstScan(userId, plantId);
+    if (isFirstScanForUser) {
+        if (plantId === 'camellia_sinensis') {
+            return 418;
+        }
+        if (plantId === 'cannabis_sativa' || plantId === 'cannabis_indica') {
+            return 420;
+        }
+        return 50;
+    }
+
+    return 0;
 };
 
-const updateLeaderboardDatabase = async (pointsToAdd: number) => {
+const updateLeaderboardDatabase = async (pointsToAdd: number, user: any) => {
     const { data: leaderboard, error } = await supabase
         .from('leaderboard')
         .select()
@@ -67,6 +87,10 @@ const updateLeaderboardDatabase = async (pointsToAdd: number) => {
 
     const updatedLeaderboard = leaderboard;
     updatedLeaderboard.points = (leaderboard.points ?? 0) + pointsToAdd;
+    updatedLeaderboard.user_name = user['firstName'] ?? 'We are Anonymous';
+    if (user['lastName']) {
+        updatedLeaderboard.user_name += ` ${user['lastName']}`;
+    }
 
     const { data: savedData, error: saveError } = await supabase
         .from('leaderboard')

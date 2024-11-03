@@ -12,6 +12,7 @@ import { useCamera } from '@/lib/providers/camera-provider';
 import { toast } from 'sonner';
 import { useCreateScanMutation } from '@/lib/api/scans';
 import { LoadingOverlay } from '@/components/ui/loading-overlay';
+import { updateLeaderboard } from '@/lib/api/leaderboard';
 
 export const Route = createFileRoute('/camera')({
     component: CameraComponent,
@@ -154,6 +155,8 @@ function CameraComponent() {
                     // @ts-expect-error only logged in users can access this route, thus we know that the user is defined
                     userId: getUserFromLocalStorage().id,
                 });
+
+                updateLeaderboard(data.id, data.new);
 
                 navigate({
                     to: '/plants/$plantId',

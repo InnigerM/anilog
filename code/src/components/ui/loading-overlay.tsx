@@ -20,7 +20,6 @@ export const LoadingOverlay: React.FC = () => {
         );
         const interval = setTimeout(() => {
             currentIndex += 1;
-            console.log('currentIndex:', currentIndex);
             if (currentIndex >= loadingMessages.length) {
                 clearInterval(interval);
             } else {
