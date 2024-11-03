@@ -13,6 +13,8 @@ export function AreasOfInterest() {
                         key={area.name}
                         position={area.center.coordinates}
                         color={area.color ?? undefined}
+                        radius={area.radius}
+                        hint={area.hint}
                     />
                 ))}
         </div>
