@@ -82,10 +82,10 @@ const updateLeaderboardDatabase = async (pointsToAdd: number, user: any) => {
 
     const updatedLeaderboard = {
         user_id: leaderboard?.user_id ?? user.id,
-        points: 0,
+        points: (leaderboard?.points ?? 0) + pointsToAdd,
         user_name: user['firstName'] ?? 'We are Anonymous',
     };
-    updatedLeaderboard.points = updatedLeaderboard.points + pointsToAdd;
+    console.log(updatedLeaderboard);
     updatedLeaderboard.user_name = user['firstName'] ?? 'We are Anonymous';
     if (user['lastName']) {
         updatedLeaderboard.user_name += ` ${user['lastName']}`;
