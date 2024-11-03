@@ -23,7 +23,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         {...props}
       />
-      <Underline classList={`h-1 -translate-x-16 -translate-y-2 ${active ? "stroke-cornflower-blue" : "stroke-cotton-light-gray"} scale-x-1200 origin-left`} />
+      <Underline classList={`h-1 -translate-x-16 -translate-y-2 stroke-cornflower-blue scale-x-1200 origin-left`} />
     </>)
   }
 )
