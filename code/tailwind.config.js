@@ -14,6 +14,7 @@ module.exports = {
             },
             colors: {
                 'balloon-flower-purple': '#7149FF',
+                'balloon-flower-purple-light': '#b7a6ff',
                 'honeysuckle-yellow': '#E1FF6B',
                 'marigold-yellow': '#FFE875',
                 'mint-green': '#93D9B7',

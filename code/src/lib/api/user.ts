@@ -21,7 +21,7 @@ export const getUserByEmail = (email: string) =>
 
             console.log(data, error, count);
 
-            return data;
+            return data as UserResponse;
         },
     });
 
