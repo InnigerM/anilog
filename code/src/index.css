@@ -70,6 +70,13 @@
     }
 }
 
+#top-bar {
+    --mask: linear-gradient(to top, #0000 20px, #000 0),
+        radial-gradient(20px, #000 98%, #0000) bottom/37px 40px;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+}
+
 nav {
     --mask: linear-gradient(to bottom, #0000 20px, #000 0),
         radial-gradient(20px, #000 98%, #0000) top/37px 40px;
