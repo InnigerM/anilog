@@ -16,7 +16,7 @@ function CollectionComponent() {
     document.body.style.backgroundColor = '#FFEDE8';
 
     return (
-        <div className="pt-20 pb-8 px-8">
+        <div className="pt-20 pb-32 px-8">
             <div className="grid grid-cols-2 gap-8">
                 <Suspense>
                     {scans &&

@@ -19,7 +19,7 @@ export default function Navigation({ variant }: NavigationProps) {
     return (
         <nav
             className={cn(
-                'px-3 pb-3 pt-7 flex gap-2 text-lg fixed bottom-0 w-full justify-around transition-colors duration-300  text-white z-[1000]',
+                'px-3 pb-3 pt-6 flex gap-2 text-lg fixed bottom-0 w-full justify-around transition-colors duration-300  text-white z-[1000]',
                 variant === 'MAP' && 'bg-blossom-pink',
                 variant === 'CAMERA' && 'bg-mint-green',
                 variant === 'COLLECTION' && 'bg-hibiscus-orange',
@@ -29,12 +29,18 @@ export default function Navigation({ variant }: NavigationProps) {
         >
             <Link to="/">
                 <i className="icon-map text-4xl text-honeysuckle-yellow" />
+                {router.location.pathname === '/map' && (
+                    <img src="/img/underline.svg" alt=""/>
+                )}
             </Link>
             {router.location.pathname === '/camera' ? (
-                <i
-                    onClick={handleScreenshot}
-                    className="icon-shutter text-4xl  text-honeysuckle-yellow cursor-pointer"
-                />
+                <div>
+                    <i
+                        onClick={handleScreenshot}
+                        className="icon-shutter text-4xl  text-honeysuckle-yellow cursor-pointer"
+                    />
+                        <img src="/img/underline.svg" className="opacity-0" alt=""/>
+                </div>
             ) : (
                 <Link to="/camera">
                     <i className="icon-camera text-4xl text-honeysuckle-yellow" />
@@ -42,9 +48,15 @@ export default function Navigation({ variant }: NavigationProps) {
             )}
             <Link to="/collection" activeOptions={{ exact: true }}>
                 <i className="icon-little-plant text-4xl text-honeysuckle-yellow" />
+                {(router.location.pathname === '/collection'  || router.location.pathname.startsWith('/plants/')) && (
+                    <img src="/img/underline.svg" alt=""/>
+                )}
             </Link>
             <Link to="/leaderboard" activeOptions={{ exact: true }}>
                 <i className="icon-leaderboard text-4xl text-honeysuckle-yellow" />
+                {router.location.pathname === '/leaderboard'  && (
+                    <img src="/img/underline.svg" alt=""/>
+                )}
             </Link>
         </nav>
     );

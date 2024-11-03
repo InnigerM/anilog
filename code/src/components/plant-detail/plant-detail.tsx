@@ -5,6 +5,8 @@ import { EndangeredLevels } from '../../../model/endangered-level.model';
 import { EndangeredLevelComponent } from '@/components/plant-detail/endangered-level';
 import { SpecialPlants } from './special-plants';
 import { getUserFromLocalStorage } from '@/lib/utils';
+import FramedImage from '@/components/ui/framedImage';
+import { Link } from '@tanstack/react-router';
 
 type PlantDetailProps = {
     plantId: string;
@@ -18,14 +20,11 @@ export default function PlantDetail({ plantId }: PlantDetailProps) {
     );
 
     return (
-        <div className="flex flex-col items-center px-8 bg-peach-cream py-16 h-content overflow-scroll">
+        <div className="flex flex-col items-center relative px-8 bg-peach-cream pt-24 pb-16 h-content overflow-scroll">
+            <Link className="icon-arrow absolute top-24 text-4xl left-6 " to="/collection"/>
             <SpecialPlants plantName={plant?.name_latin} />
-            <img
-                className="mt-6 max-h-[254px] h-full object-cover w-auto"
-                src={plant?.scans[0].imageUrl}
-                width={170}
-                height={254}
-            />
+            <FramedImage imgUrl={plant!.scans[0].imageUrl} className="w-56 h-72" imageClasses="w-[157px] h-[236px]"/>
+
             <H1 className="text-hibiscus-orange mt-2 mb-0">
                 <span
                     className={`text-hibiscus-orange mr-2 icon-${plant?.type}`}

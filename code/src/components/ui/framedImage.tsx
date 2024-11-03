@@ -1,17 +1,20 @@
 import { Link, linkOptions, LinkProps } from '@tanstack/react-router';
+import { cn } from '@/lib/utils';
 
 type FramedImageProps = {
     imgUrl: string;
     linkOptions?: Omit<LinkProps, 'to' | 'children'>;
+    className?: string;
+    imageClasses?: string;
 };
 
-export default function FramedImage({ imgUrl, linkOptions }: FramedImageProps) {
-    const framePath = './img/frame.svg';
+export default function FramedImage({ imgUrl, linkOptions, className, imageClasses }: FramedImageProps) {
+    const framePath = '/img/frame.svg';
 
     return (
         <Link {...linkOptions} className="flex justify-center">
-            <div className="relative flex direction justify-center items-center w-36 h-44">
-                <div className="w-24 h-36">
+            <div className={cn('relative flex justify-center items-center w-36 h-44', className)}>
+                <div className={cn('w-24 h-36', imageClasses)}>
                     <img
                         className="size-full object-cover"
                         src={imgUrl}
