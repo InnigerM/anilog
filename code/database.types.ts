@@ -36,6 +36,24 @@ export type Database = {
         }
         Relationships: []
       }
+      leaderboard: {
+        Row: {
+          points: number | null
+          user_id: number
+          user_name: string | null
+        }
+        Insert: {
+          points?: number | null
+          user_id?: number
+          user_name?: string | null
+        }
+        Update: {
+          points?: number | null
+          user_id?: number
+          user_name?: string | null
+        }
+        Relationships: []
+      }
       plants: {
         Row: {
           color: string | null
