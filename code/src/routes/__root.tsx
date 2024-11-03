@@ -32,11 +32,11 @@ function RootComponent() {
 
     const view =
         router.location.pathname === '/'
-            ? 'MAP'
+            ? localStorage.getItem(USER_LOCAL_STORAGE_KEY) ? 'MAP' : 'REGISTER'
             : (router.location.pathname
-                  .replace(/^\/+/, '')
-                  .split('/')[0]
-                  .toUpperCase() as View);
+                .replace(/^\/+/, '')
+                .split('/')[0]
+                .toUpperCase() as View);
 
     return (
         <>

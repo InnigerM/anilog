@@ -1,7 +1,7 @@
 import { View } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import React from 'react';
-import {H1} from "@/components/ui/typography";
+import { H1 } from "@/components/ui/typography";
 
 type TopBarProps = {
     variant: View;
@@ -16,6 +16,7 @@ export default function TopBar({ variant }: TopBarProps) {
                 variant === 'CAMERA' && 'bg-mint-green',
                 variant === 'COLLECTION' && 'bg-hibiscus-orange',
                 variant === 'PLANTS' && 'bg-hibiscus-orange',
+                variant === 'REGISTER' && 'bg-cornflower-blue',
                 variant === 'LEADERBOARD' && 'bg-balloon-flower-purple',
             )}
         >
