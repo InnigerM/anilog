@@ -43,7 +43,7 @@ export default function TopBar({ variant }: TopBarProps) {
                 {myRank?.rank ? (
                     <span>
                         <i className="icon-leaderboard mr-2"></i>Rank{' '}
-                        {myRank?.rank}
+                        {myRank?.rank + 1}
                     </span>
                 ) : (
                     'Not ranked yet'
