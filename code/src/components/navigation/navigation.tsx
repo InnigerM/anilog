@@ -28,22 +28,24 @@ export default function Navigation({ variant }: NavigationProps) {
                 variant === 'LEADERBOARD' && 'bg-balloon-flower-purple',
             )}
         >
-            <Link to="/">
-                <i className="icon-map text-4xl text-honeysuckle-yellow" />
-            </Link>
-            {router.location.pathname === '/camera' ? (
-                <i
-                    onClick={handleScreenshot}
-                    className="icon-shutter text-4xl  text-honeysuckle-yellow cursor-pointer"
-                />
-            ) : (
-                <Link to="/camera">
-                    <i className="icon-camera text-4xl text-honeysuckle-yellow" />
+            {variant !== 'REGISTER' && <>
+                <Link to="/">
+                    <i className="icon-map text-4xl text-honeysuckle-yellow" />
                 </Link>
-            )}
-            <Link to="/collection" activeOptions={{ exact: true }}>
-                <i className="icon-little-plant text-4xl text-honeysuckle-yellow" />
-            </Link>
+                {router.location.pathname === '/camera' ? (
+                    <i
+                        onClick={handleScreenshot}
+                        className="icon-shutter text-4xl  text-honeysuckle-yellow cursor-pointer"
+                    />
+                ) : (
+                    <Link to="/camera">
+                        <i className="icon-camera text-4xl text-honeysuckle-yellow" />
+                    </Link>
+                )}
+                <Link to="/collection" activeOptions={{ exact: true }}>
+                    <i className="icon-little-plant text-4xl text-honeysuckle-yellow" />
+                </Link>
+            </>}
         </nav>
     );
 }
