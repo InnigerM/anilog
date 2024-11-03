@@ -1,5 +1,6 @@
 import {
     Outlet,
+    ScrollRestoration,
     createRootRoute,
     redirect,
     useRouterState,
@@ -42,6 +43,7 @@ function RootComponent() {
             <QueryClientProvider client={queryClient}>
                 <CameraProvider>
                     <TopBar variant={view} />
+                    <ScrollRestoration />
                     <Outlet />
                     <Navigation variant={view} />
                     <Toaster />
