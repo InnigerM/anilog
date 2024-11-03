@@ -28,39 +28,47 @@ export default function Navigation({ variant }: NavigationProps) {
                 variant === 'LEADERBOARD' && 'bg-balloon-flower-purple',
             )}
         >
-            {variant !== 'REGISTER' && <>
-            <Link to="/">
-                <i className="icon-map text-4xl text-honeysuckle-yellow" />
-                {router.location.pathname === '/map' && (
-                    <img src="/img/underline.svg" alt=""/>
-                )}
-            </Link>
-            {router.location.pathname === '/camera' ? (
-                <div>
-                    <i
-                        onClick={handleScreenshot}
-                        className="icon-shutter text-4xl  text-honeysuckle-yellow cursor-pointer"
-                    />
-                        <img src="/img/underline.svg" className="opacity-0" alt=""/>
-                </div>
-            ) : (
-                <Link to="/camera">
-                    <i className="icon-camera text-4xl text-honeysuckle-yellow" />
-                </Link>
+            {variant !== 'REGISTER' && (
+                <>
+                    <Link to="/">
+                        <i className="icon-map text-4xl text-honeysuckle-yellow" />
+                        {router.location.pathname === '/map' && (
+                            <img src="/img/underline.svg" alt="" />
+                        )}
+                    </Link>
+                    {router.location.pathname === '/camera' ? (
+                        <div>
+                            <i
+                                onClick={handleScreenshot}
+                                className="icon-shutter text-4xl  text-honeysuckle-yellow cursor-pointer"
+                            />
+                            <img
+                                src="/img/underline.svg"
+                                className="opacity-0"
+                                alt=""
+                            />
+                        </div>
+                    ) : (
+                        <Link to="/camera">
+                            <i className="icon-camera text-4xl text-honeysuckle-yellow" />
+                        </Link>
+                    )}
+                    <Link to="/collection" activeOptions={{ exact: true }}>
+                        <i className="icon-little-plant text-4xl text-honeysuckle-yellow" />
+                        {(router.location.pathname === '/collection' ||
+                            router.location.pathname.startsWith(
+                                '/plants/',
+                            )) && <img src="/img/underline.svg" alt="" />}
+                    </Link>
+                    {router.location.pathname !== '/camera' ? (
+                        <Link to="/leaderboard" activeOptions={{ exact: true }}>
+                            <i className="icon-leaderboard text-4xl text-honeysuckle-yellow" />
+                        </Link>
+                    ) : (
+                        ''
+                    )}
+                </>
             )}
-            <Link to="/collection" activeOptions={{ exact: true }}>
-                <i className="icon-little-plant text-4xl text-honeysuckle-yellow" />
-                {(router.location.pathname === '/collection'  || router.location.pathname.startsWith('/plants/')) && (
-                    <img src="/img/underline.svg" alt=""/>
-                )}
-            </Link>
-            <Link to="/leaderboard" activeOptions={{ exact: true }}>
-                <i className="icon-leaderboard text-4xl text-honeysuckle-yellow" />
-                {router.location.pathname === '/leaderboard'  && (
-                    <img src="/img/underline.svg" alt=""/>
-                )}
-            </Link>
-            </>}
         </nav>
     );
 }
