@@ -1,5 +1,6 @@
 import {
     Outlet,
+    ScrollRestoration,
     createRootRoute,
     redirect,
     useRouterState,
@@ -31,17 +32,18 @@ function RootComponent() {
 
     const view =
         router.location.pathname === '/'
-            ? 'MAP'
+            ? localStorage.getItem(USER_LOCAL_STORAGE_KEY) ? 'MAP' : 'REGISTER'
             : (router.location.pathname
-                  .replace(/^\/+/, '')
-                  .split('/')[0]
-                  .toUpperCase() as View);
+                .replace(/^\/+/, '')
+                .split('/')[0]
+                .toUpperCase() as View);
 
     return (
         <>
             <QueryClientProvider client={queryClient}>
                 <CameraProvider>
                     <TopBar variant={view} />
+                    <ScrollRestoration />
                     <Outlet />
                     <Navigation variant={view} />
                     <Toaster />

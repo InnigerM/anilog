@@ -5,7 +5,7 @@ import { LatLng } from 'leaflet';
 
 export type AreaData = Pick<
     Database['public']['Tables']['areasOfInterest']['Row'],
-    'center' | 'name' | 'color'
+    'center' | 'name' | 'color' | 'radius' | 'hint'
 > & {
     center: {
         coordinates: LatLng;
@@ -16,9 +16,7 @@ export const getAreasOfInterest = () =>
     queryOptions({
         queryKey: ['areasOfInterest'],
         queryFn: async () => {
-            const { data } = await supabase
-                .from('areasOfInterest')
-                .select('center, name, color');
+            const { data } = await supabase.from('areasOfInterest').select('*');
 
             if (data) {
                 const result: AreaData[] = data.map((area) => ({
