@@ -27,7 +27,7 @@ export function LocationMarker() {
     }, []);
 
     return !position ? (
-        <div className="absolute top-0 left-0 right-0 z-[1000] flex items-center justify-center">
+        <div className="absolute text-blossom-pink top-20 left-0 right-0 z-[1000] flex items-center justify-center">
             <span>Loading your location...</span>
         </div>
     ) : (
