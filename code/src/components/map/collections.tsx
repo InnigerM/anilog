@@ -20,7 +20,10 @@ export function Collections({ user }: CollectionsProps) {
             {!isPending &&
                 !isError &&
                 scans &&
-                scans.map((scan) => <CollectionMarker {...scan} />)}
+                scans.map(
+                    (scan) =>
+                        scan && scan.plant && <CollectionMarker {...scan} />,
+                )}
         </div>
     );
 }
