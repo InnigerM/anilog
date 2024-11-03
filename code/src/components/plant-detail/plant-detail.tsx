@@ -1,23 +1,28 @@
-import { getPlantById } from '@/lib/api/plant';
+import { getPlantByIdForUser } from '@/lib/api/plant';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { H1, H2 } from '@/components/ui/typography';
 import { EndangeredLevels } from '../../../model/endangered-level.model';
 import { EndangeredLevelComponent } from '@/components/plant-detail/endangered-level';
 import { SpecialPlants } from './special-plants';
+import { getUserFromLocalStorage } from '@/lib/utils';
 
 type PlantDetailProps = {
     plantId: string;
 };
 
 export default function PlantDetail({ plantId }: PlantDetailProps) {
-    const { data: plant } = useSuspenseQuery(getPlantById(plantId));
+    const user = getUserFromLocalStorage();
+
+    const { data: plant } = useSuspenseQuery(
+        getPlantByIdForUser(plantId, user!.id),
+    );
 
     return (
         <div className="flex flex-col items-center px-8 bg-peach-cream pb-16 h-content overflow-scroll">
             <SpecialPlants plantName={plant?.name_latin} />
             <img
                 className="mt-6"
-                src="https://placehold.co/170x254/EEE/FF8B6B"
+                src={plant?.scans[0].imageUrl}
                 width={170}
                 height={254}
             />
