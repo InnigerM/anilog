@@ -7,9 +7,7 @@ export const getLeaderboard = () =>
     queryOptions({
         queryKey: ['leaderboard'],
         queryFn: async () => {
-            const { data } = await supabase
-                .from('leaderboard')
-                .select();
+            const { data } = await supabase.from('leaderboard').select();
 
             return data ?? null;
         },
@@ -79,6 +77,7 @@ const updateLeaderboardDatabase = async (pointsToAdd: number, user: any) => {
     const { data: leaderboard, error } = await supabase
         .from('leaderboard')
         .select()
+        .eq('user_id', user.id)
         .single();
     if (error) {
         throw new Error(error.message);
