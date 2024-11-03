@@ -79,12 +79,13 @@ const updateLeaderboardDatabase = async (pointsToAdd: number, user: any) => {
         .select()
         .eq('user_id', user.id)
         .single();
-    if (error) {
-        throw new Error(error.message);
-    }
 
-    const updatedLeaderboard = leaderboard;
-    updatedLeaderboard.points = (leaderboard.points ?? 0) + pointsToAdd;
+    const updatedLeaderboard = {
+        user_id: leaderboard?.user_id ?? user.id,
+        points: 0,
+        user_name: user['firstName'] ?? 'We are Anonymous',
+    };
+    updatedLeaderboard.points = updatedLeaderboard.points + pointsToAdd;
     updatedLeaderboard.user_name = user['firstName'] ?? 'We are Anonymous';
     if (user['lastName']) {
         updatedLeaderboard.user_name += ` ${user['lastName']}`;
