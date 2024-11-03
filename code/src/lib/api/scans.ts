@@ -52,7 +52,8 @@ export const getScansForUser = (userId: number) =>
             const { data } = await supabase
                 .from('scans')
                 .select('*, plants(*)')
-                .eq('userId', userId);
+                .eq('userId', userId)
+                .order('created_at', { ascending: false });
 
             return data ?? null;
         },
