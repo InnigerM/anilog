@@ -34,17 +34,22 @@ function CollectionComponent() {
 
   return (
     <div className="p-8">
-      <div className='grid grid-cols-2 gap-8'>
-        {dummyImgUrls.map((ooi) => {
-          return <div className="flex flex-col justify-center">
-            <FramedImage
-              imgUrl={ooi.imgUrl}
-              link={ooi.detailsPageUrl} />
-            <span className="mt-4 text-center text-hibiscus-orange" >{ooi.name}</span>
-          </div>
-        })}
 
-      </div>
+      {false ? //dummyImgUrls.length ?
+        <div className='grid grid-cols-2 gap-8'>
+          {dummyImgUrls.map((ooi) => {
+            return <div className="flex flex-col justify-center">
+              <FramedImage
+                imgUrl={ooi.imgUrl}
+                link={ooi.detailsPageUrl} />
+              <span className="mt-4 text-center text-hibiscus-orange" >{ooi.name}</span>
+            </div>
+          })}
+
+        </div>
+        :
+        <p className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-hibiscus-orange'>Nothing to see here ... {`:)`}</p>
+      }
     </div>
   )
 }
