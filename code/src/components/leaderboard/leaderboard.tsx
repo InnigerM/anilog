@@ -22,7 +22,7 @@ export function Leaderboard() {
                 .sort((a, b) => b.points - a.points)
                 .map((entry: LeaderboardEntry, index: number) => (
                 <div className="leaderboard-entry-box bg-balloon-flower-purple-light mx-8 my-2 p-1">
-                    <div className="leaderboard-entry-box bg-white flex justify-between p-4">
+                    <div className="leaderboard-entry-box bg-peach-cream flex justify-between p-4">
                         <div>
                             <span className="font-extrabold text-balloon-flower-purple mr-2">
                                 { index + 1 }.
