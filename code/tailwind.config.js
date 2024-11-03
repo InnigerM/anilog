@@ -18,7 +18,7 @@ module.exports = {
                 'honeysuckle-yellow': '#E1FF6B',
                 'marigold-yellow': '#FFE875',
                 'mint-green': '#93D9B7',
-                'blossom-pink': '#FFB0E7',
+                'blossom-pink': '#FF9BE1',
                 'hibiscus-orange': '#FF8B6B',
                 'black-pepper': '#222222',
                 'dusty-miller-gray': '#6B6969',

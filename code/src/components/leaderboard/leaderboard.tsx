@@ -16,7 +16,7 @@ export function Leaderboard() {
     ];
 
     return (
-        <div className="mt-24 pb-40 overflow-scroll">
+        <div className="mt-24 pb-40 overflow-scroll max-w-[500px] mx-auto">
             <H1 className="mx-8 mb-4">Anilog Ranking</H1>
             {test
                 .sort((a, b) => b.points - a.points)
