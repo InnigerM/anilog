@@ -43,9 +43,11 @@ export default function Navigation({ variant }: NavigationProps) {
             <Link to="/collection" activeOptions={{ exact: true }}>
                 <i className="icon-little-plant text-4xl text-honeysuckle-yellow" />
             </Link>
-            <Link to="/leaderboard" activeOptions={{ exact: true }}>
-                <i className="icon-leaderboard text-4xl text-honeysuckle-yellow" />
-            </Link>
+            {router.location.pathname !== '/camera' ? (
+                <Link to="/leaderboard" activeOptions={{ exact: true }}>
+                    <i className="icon-leaderboard text-4xl text-honeysuckle-yellow" />
+                </Link>
+            ) : ''}
         </nav>
     );
 }

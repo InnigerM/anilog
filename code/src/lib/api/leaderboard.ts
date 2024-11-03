@@ -9,8 +9,7 @@ export const getLeaderboard = () =>
         queryFn: async () => {
             const { data } = await supabase
                 .from('leaderboard')
-                .select()
-                .single();
+                .select();
 
             return data ?? null;
         },

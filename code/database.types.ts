@@ -14,25 +14,31 @@ export type Database = {
           center: unknown
           color: string | null
           created_at: string
+          hint: string | null
           id: number
           isEnabled: boolean
           name: string
+          radius: number
         }
         Insert: {
           center: unknown
           color?: string | null
           created_at?: string
+          hint?: string | null
           id?: number
           isEnabled?: boolean
           name: string
+          radius: number
         }
         Update: {
           center?: unknown
           color?: string | null
           created_at?: string
+          hint?: string | null
           id?: number
           isEnabled?: boolean
           name?: string
+          radius?: number
         }
         Relationships: []
       }
