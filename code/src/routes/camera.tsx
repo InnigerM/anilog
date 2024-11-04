@@ -148,6 +148,8 @@ function CameraComponent() {
             }
 
             await getCurrentPosition(async (position) => {
+                await updateLeaderboard(data.id, data.new ?? false);
+
                 await createScanMutation.mutateAsync({
                     imageUrl,
                     location: position,
@@ -155,8 +157,6 @@ function CameraComponent() {
                     // @ts-expect-error only logged in users can access this route, thus we know that the user is defined
                     userId: getUserFromLocalStorage().id,
                 });
-
-                await updateLeaderboard(data.id, data.new);
 
                 navigate({
                     to: '/plants/$plantId',
