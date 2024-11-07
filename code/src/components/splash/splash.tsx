@@ -1,5 +1,6 @@
 import { StrokeButton } from '@/components/ui/button';
 import { Body } from '@/components/ui/typography';
+import { Link } from '@tanstack/react-router';
 
 export function Splash() {
     return (
@@ -7,12 +8,14 @@ export function Splash() {
             <img src="/logo.svg" alt="Anilog logo" />
             <Body className="text-honeysuckle-yellow max-w-[560px]">
                 Anilog is a web app that encourages nature exploration by
-                rewarding users for discovering new plant and animal species.
+                rewarding users for discovering new plants.
                 Users can earn points for their discoveries. Anilog focuses
-                attention on the natural world rather than the screen. 
+                attention on the natural world rather than the screen.
             </Body>
 
-            <StrokeButton>Start</StrokeButton>
+            <Link to="/registration" activeOptions={{ exact: true }}>
+                <StrokeButton>Start</StrokeButton>
+            </Link>
 
             <div
                 className="absolute bottom-4 w-screen h-3 bg-repeat-x"

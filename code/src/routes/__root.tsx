@@ -20,7 +20,7 @@ export const Route = createRootRoute({
     component: RootComponent,
     beforeLoad: (context) => {
         const userItem = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
-        if (!userItem && context.location.href !== '/') {
+        if (!userItem && (context.location.href !== '/' && context.location.href !== '/registration')) {
             console.log('no auth present: redirecting to home');
             throw redirect({ to: '/' });
         }
@@ -32,7 +32,7 @@ function RootComponent() {
 
     const view =
         router.location.pathname === '/'
-            ? localStorage.getItem(USER_LOCAL_STORAGE_KEY) ? 'MAP' : 'REGISTER'
+            ? localStorage.getItem(USER_LOCAL_STORAGE_KEY) ? 'MAP' : 'SPLASH'
             : (router.location.pathname
                 .replace(/^\/+/, '')
                 .split('/')[0]

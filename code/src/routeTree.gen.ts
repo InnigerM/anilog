@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as RegistrationImport } from './routes/registration'
 import { Route as MapImport } from './routes/map'
 import { Route as LeaderboardImport } from './routes/leaderboard'
 import { Route as CollectionImport } from './routes/collection'
@@ -19,6 +20,12 @@ import { Route as IndexImport } from './routes/index'
 import { Route as PlantsPlantIdImport } from './routes/plants.$plantId'
 
 // Create/Update Routes
+
+const RegistrationRoute = RegistrationImport.update({
+  id: '/registration',
+  path: '/registration',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const MapRoute = MapImport.update({
   id: '/map',
@@ -95,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MapImport
       parentRoute: typeof rootRoute
     }
+    '/registration': {
+      id: '/registration'
+      path: '/registration'
+      fullPath: '/registration'
+      preLoaderRoute: typeof RegistrationImport
+      parentRoute: typeof rootRoute
+    }
     '/plants/$plantId': {
       id: '/plants/$plantId'
       path: '/plants/$plantId'
@@ -113,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/collection': typeof CollectionRoute
   '/leaderboard': typeof LeaderboardRoute
   '/map': typeof MapRoute
+  '/registration': typeof RegistrationRoute
   '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
@@ -122,6 +137,7 @@ export interface FileRoutesByTo {
   '/collection': typeof CollectionRoute
   '/leaderboard': typeof LeaderboardRoute
   '/map': typeof MapRoute
+  '/registration': typeof RegistrationRoute
   '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
@@ -132,6 +148,7 @@ export interface FileRoutesById {
   '/collection': typeof CollectionRoute
   '/leaderboard': typeof LeaderboardRoute
   '/map': typeof MapRoute
+  '/registration': typeof RegistrationRoute
   '/plants/$plantId': typeof PlantsPlantIdRoute
 }
 
@@ -143,6 +160,7 @@ export interface FileRouteTypes {
     | '/collection'
     | '/leaderboard'
     | '/map'
+    | '/registration'
     | '/plants/$plantId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -151,6 +169,7 @@ export interface FileRouteTypes {
     | '/collection'
     | '/leaderboard'
     | '/map'
+    | '/registration'
     | '/plants/$plantId'
   id:
     | '__root__'
@@ -159,6 +178,7 @@ export interface FileRouteTypes {
     | '/collection'
     | '/leaderboard'
     | '/map'
+    | '/registration'
     | '/plants/$plantId'
   fileRoutesById: FileRoutesById
 }
@@ -169,6 +189,7 @@ export interface RootRouteChildren {
   CollectionRoute: typeof CollectionRoute
   LeaderboardRoute: typeof LeaderboardRoute
   MapRoute: typeof MapRoute
+  RegistrationRoute: typeof RegistrationRoute
   PlantsPlantIdRoute: typeof PlantsPlantIdRoute
 }
 
@@ -178,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionRoute: CollectionRoute,
   LeaderboardRoute: LeaderboardRoute,
   MapRoute: MapRoute,
+  RegistrationRoute: RegistrationRoute,
   PlantsPlantIdRoute: PlantsPlantIdRoute,
 }
 
@@ -196,6 +218,7 @@ export const routeTree = rootRoute
         "/collection",
         "/leaderboard",
         "/map",
+        "/registration",
         "/plants/$plantId"
       ]
     },
@@ -213,6 +236,9 @@ export const routeTree = rootRoute
     },
     "/map": {
       "filePath": "map.tsx"
+    },
+    "/registration": {
+      "filePath": "registration.tsx"
     },
     "/plants/$plantId": {
       "filePath": "plants.$plantId.tsx"

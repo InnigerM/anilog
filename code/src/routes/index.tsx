@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { Registration } from '@/components/user';
 import { getUserFromLocalStorage } from '@/lib/utils';
+import {Splash} from "@/components/splash";
 
 export const Route = createFileRoute('/')({
     component: RouteComponent,
@@ -13,5 +13,5 @@ export const Route = createFileRoute('/')({
 });
 
 function RouteComponent() {
-    return <Registration />;
+    return <Splash />;
 }

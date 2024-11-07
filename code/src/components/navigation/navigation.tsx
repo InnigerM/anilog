@@ -24,11 +24,11 @@ export default function Navigation({ variant }: NavigationProps) {
                 variant === 'CAMERA' && 'bg-mint-green',
                 variant === 'COLLECTION' && 'bg-hibiscus-orange',
                 variant === 'PLANTS' && 'bg-hibiscus-orange',
-                variant === 'REGISTER' && 'bg-cornflower-blue',
+                variant === 'REGISTRATION' && 'bg-cornflower-blue',
                 variant === 'LEADERBOARD' && 'bg-balloon-flower-purple',
             )}
         >
-            {variant !== 'REGISTER' && (
+            {variant !== 'REGISTRATION' && variant !== 'SPLASH' && (
                 <>
                     <Link to="/">
                         <i className="icon-map text-4xl text-honeysuckle-yellow" />

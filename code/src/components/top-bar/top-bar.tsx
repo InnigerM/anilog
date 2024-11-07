@@ -31,7 +31,7 @@ export default function TopBar({ variant }: TopBarProps) {
                 variant === 'CAMERA' && 'bg-mint-green',
                 variant === 'COLLECTION' && 'bg-hibiscus-orange',
                 variant === 'PLANTS' && 'bg-hibiscus-orange',
-                variant === 'REGISTER' && 'bg-cornflower-blue',
+                variant === 'REGISTRATION' && 'bg-cornflower-blue',
                 variant === 'LEADERBOARD' && 'bg-balloon-flower-purple',
             )}
         >
@@ -46,7 +46,7 @@ export default function TopBar({ variant }: TopBarProps) {
                         {myRank?.rank + 1}
                     </span>
                 ) : (
-                    'Not ranked yet'
+                    <div className="invisible">No rank</div>
                 )}
             </H1>
         </div>
